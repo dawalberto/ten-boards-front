@@ -1,3 +1,5 @@
+import i18nOptions from './i18n/i18n'
+
 export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
@@ -29,7 +31,10 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-i18n',
   ],
+
+  i18n: i18nOptions,
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
