@@ -7,9 +7,7 @@
           src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
           alt="Workflow"
         />
-        <h2 class="mt-6 fl-upper">
-          {{ $t('sign-in') }}
-        </h2>
+        <h2 class="mt-6 fl-upper">{{ $t('sign-in') }}</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           {{ $t('or') }}
           <a href="#" class="link">{{ $t('sign-up') }}</a>
@@ -18,9 +16,9 @@
       <form class="mt-8 space-y-6" action="#" method="POST">
         <input type="hidden" name="remember" value="true" />
         <div class="group">
-          <label for="email-address">{{
-            $t('email') + ' ' + $t('or') + ' ' + $t('username')
-          }}</label>
+          <label for="email-address">
+            {{ $t('email') + ' ' + $t('or') + ' ' + $t('username') }}
+          </label>
           <input
             id="email-address"
             name="email"
@@ -30,9 +28,7 @@
           />
         </div>
         <div class="group">
-          <label for="password">
-            {{ $t('password') }}
-          </label>
+          <label for="password">{{ $t('password') }}</label>
           <input
             id="password"
             name="password"

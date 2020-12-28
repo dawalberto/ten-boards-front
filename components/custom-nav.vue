@@ -4,9 +4,9 @@
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <button
-            @click="showMenuOptions = !showMenuOptions"
-            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
             aria-expanded="false"
+            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            @click="showMenuOptions = !showMenuOptions"
           >
             <span class="sr-only">Open main menu</span>
             <svg
@@ -99,8 +99,8 @@
           <div class="ml-3 relative">
             <div>
               <button
-                class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 id="user-menu"
+                class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 aria-haspopup="true"
                 @click="showUserOptions = !showUserOptions"
               >

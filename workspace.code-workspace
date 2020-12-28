@@ -24,6 +24,12 @@
     "peacock.color": "#51ab7c",
     "css.validate": false,
     "vetur.validation.style": false,
-    "tailwindCSS.validate": false
+    "tailwindCSS.validate": false,
+    "editor.formatOnSave": true,
+    "vetur.validation.template": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "prettier.disableLanguages": ["markdown", "css"]
   }
 }
