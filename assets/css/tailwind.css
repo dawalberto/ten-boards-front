@@ -65,4 +65,8 @@
     label {
         @apply block text-gray-600 fl-upper group-hover:text-purple-600;
     }
+
+    p {
+        @apply text-gray-700;
+    }
 }

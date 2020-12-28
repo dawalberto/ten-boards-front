@@ -30,6 +30,10 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
     },
-    "prettier.disableLanguages": ["markdown", "css"]
+    "prettier.disableLanguages": [
+      "markdown",
+      "css"
+    ],
+    "editor.tabSize": 2
   }
 }
