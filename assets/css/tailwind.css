@@ -1,3 +1,68 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .text-gradient {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply py-2 
+	px-4 
+	text-sm 
+	font-medium 
+	rounded-md 
+	text-white 
+	focus:outline-none 
+	focus:ring-2 
+	focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn;
+    @apply bg-gradient-to-r 
+	from-blue-500 
+	to-purple-600 
+	hover:to-blue-500 
+	hover:from-purple-600 
+	focus:ring-blue-500;
+  }
+
+  .fl-upper::first-letter {
+    text-transform: uppercase;
+  }
+
+  .link {
+    @apply text-gradient 
+	font-medium 
+	bg-gradient-to-r 
+	from-blue-500 
+	to-purple-600 
+	hover:from-purple-600 
+	hover:to-blue-500 
+	border-b-2
+	border-transparent
+	border-opacity-50
+	focus:border-dotted
+	focus:border-blue-500;
+  }
+}
+
+@layer base {
+  h2 {
+    @apply text-center text-3xl font-extrabold text-gray-900;
+  }
+
+  input[type='text'],
+  input[type='password'] {
+    @apply appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-purple-600 focus:z-10 sm:text-sm;
+  }
+
+  label {
+    @apply block text-gray-600 fl-upper group-hover:text-purple-600;
+  }
+}

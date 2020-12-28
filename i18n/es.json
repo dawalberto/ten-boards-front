@@ -1,8 +1,15 @@
 {
-  "welcome": "Bienvenido",
   "summary": "resumen",
   "boards": "tableros",
   "your-profile": "tu perfil",
   "settings": "configuración",
-  "sign-out": "cerrar sesión"
+  "sign-out": "cerrar sesión",
+  "remember": "recordar",
+  "forgot-password": "¿Has olvidado tu contraseña?",
+  "sign-in": "iniciar sesión",
+  "sign-up": "registrarse",
+  "or": "o",
+  "password": "contraseña",
+  "email": "email",
+  "username": "nombre de usuario"
 }

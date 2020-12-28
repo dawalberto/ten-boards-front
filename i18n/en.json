@@ -1,8 +1,15 @@
 {
-  "welcome": "Welcome",
   "summary": "summary",
   "boards": "boards in inglish",
   "your-profile": "your profile",
   "settings": "settings",
-  "sign-out": "sign out"
+  "sign-out": "sign out",
+  "remember": "remember me",
+  "forgot-password": "forgot your password?",
+  "sign-in": "sign in",
+  "sign-up": "sign up",
+  "or": "or",
+  "password": "password",
+  "email": "email",
+  "username": "username"
 }

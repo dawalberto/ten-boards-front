@@ -62,12 +62,12 @@
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
-              <a href="#" class="nav-link nav-link-current">{{
-                $t('summary')
-              }}</a>
-              <a href="#" class="nav-link nav-link-default">{{
-                $t('boards')
-              }}</a>
+              <NuxtLink to="/" class="nav-link nav-link-current">
+                {{ $t('summary') }}
+              </NuxtLink>
+              <NuxtLink to="/" class="nav-link nav-link-default">
+                {{ $t('boards') }}
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -137,23 +137,23 @@
                 aria-orientation="vertical"
                 aria-labelledby="user-menu"
               >
-                <a
-                  href="#"
+                <NuxtLink
+                  to="/"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 capitalize"
                   role="menuitem"
-                  >{{ $t('your-profile') }}</a
+                  >{{ $t('your-profile') }}</NuxtLink
                 >
-                <a
-                  href="#"
+                <NuxtLink
+                  to="/"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 capitalize"
                   role="menuitem"
-                  >{{ $t('settings') }}</a
+                  >{{ $t('settings') }}</NuxtLink
                 >
-                <a
-                  href="#"
+                <NuxtLink
+                  to="/"
                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 capitalize"
                   role="menuitem"
-                  >{{ $t('sign-out') }}</a
+                  >{{ $t('sign-out') }}</NuxtLink
                 >
               </div>
             </transition>
@@ -170,12 +170,12 @@
     <div :class="showMenuOptions ? 'block' : 'hidden'" class="sm:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="nav-link nav-link-current block">{{
+        <NuxtLink to="/" class="nav-link nav-link-current block">{{
           $t('summary')
-        }}</a>
-        <a href="#" class="nav-link nav-link-default block">{{
+        }}</NuxtLink>
+        <NuxtLink to="/" class="nav-link nav-link-default block">{{
           $t('boards')
-        }}</a>
+        }}</NuxtLink>
       </div>
     </div>
   </nav>
@@ -197,7 +197,7 @@ export default {
   @apply text-white px-3 py-2 rounded-md text-sm font-medium capitalize;
 }
 .nav-link-default {
-  @apply hover:bg-indigo-400;
+  @apply hover:bg-purple-600;
 }
 .nav-link-current {
   @apply bg-gray-900;
