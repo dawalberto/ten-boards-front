@@ -62,17 +62,12 @@
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a
-                href="#"
-                class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium capitalize"
-                >{{ $t('summary') }}</a
-              >
-              <a
-                href="#"
-                class="text-white hover:bg-indigo-400 px-3 py-2 rounded-md text-sm font-medium capitalize"
-                >{{ $t('boards') }}</a
-              >
+              <a href="#" class="nav-link nav-link-current">{{
+                $t('summary')
+              }}</a>
+              <a href="#" class="nav-link nav-link-default">{{
+                $t('boards')
+              }}</a>
             </div>
           </div>
         </div>
@@ -175,16 +170,12 @@
     <div :class="showMenuOptions ? 'block' : 'hidden'" class="sm:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a
-          href="#"
-          class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium capitalize"
-          >{{ $t('summary') }}</a
-        >
-        <a
-          href="#"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium capitalize"
-          >{{ $t('boards') }}</a
-        >
+        <a href="#" class="nav-link nav-link-current block">{{
+          $t('summary')
+        }}</a>
+        <a href="#" class="nav-link nav-link-default block">{{
+          $t('boards')
+        }}</a>
       </div>
     </div>
   </nav>
@@ -201,4 +192,14 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.nav-link {
+  @apply text-white px-3 py-2 rounded-md text-sm font-medium capitalize;
+}
+.nav-link-default {
+  @apply hover:bg-indigo-400;
+}
+.nav-link-current {
+  @apply bg-gray-900;
+}
+</style>
