@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center text-center">
-    <div v-if="error.statusCode === 404" class="p-80">
+    <div v-if="error.statusCode" class="p-80">
       <h1
         class="text-9xl text-gradient bg-gradient-to-r from-blue-500 to-purple-600 font-light"
       >

@@ -12,7 +12,7 @@ export default {
       name: 'Español',
     },
   ],
-  defaultLocale: 'es',
+  defaultLocale: 'en',
   vueI18n: {
     fallbackLocale: 'en',
     messages: {

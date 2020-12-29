@@ -58,13 +58,17 @@ export default {
   auth: {
     strategies: {
       local: {
+        token: {
+          property: 'data.token',
+          type: '',
+        },
         endpoints: {
           login: {
             url: '/api/users/login',
             method: 'post',
             propertyName: 'data.token',
           },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
+          user: { url: '/api/users/me', method: 'get' },
           logout: false,
         },
       },

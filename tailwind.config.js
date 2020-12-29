@@ -13,6 +13,8 @@ module.exports = {
   variants: {
     extend: {
       borderStyle: ['focus'],
+      opacity: ['disabled'],
+      cursor: ['disabled'],
     },
   },
   plugins: [],

@@ -13,15 +13,21 @@
           <a href="#" class="link">{{ $t('sign-up') }}</a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" method="POST" @submit.prevent="signIn">
+      <form class="mt-8 space-y-6" method="post" @submit.prevent="signIn">
         <input type="hidden" name="remember" value="true" />
         <div class="group">
-          <label for="emailOrUsername">
+          <label
+            for="emailOrUsername"
+            class="ease-out duration-200"
+            :class="loginStatusCodeError === 401 ? 'label-error' : ''"
+          >
             {{ $t('email') + ' ' + $t('or') + ' ' + $t('username') }}
           </label>
           <input
             id="emailOrUsername"
             v-model="emailOrUsername"
+            class="ease-out duration-200"
+            :class="loginStatusCodeError === 401 ? 'input-error' : ''"
             name="emailOrUsername"
             type="text"
             autocomplete="email"
@@ -29,10 +35,18 @@
           />
         </div>
         <div class="group">
-          <label for="password">{{ $t('password') }}</label>
+          <label
+            for="password"
+            class="ease-out duration-200"
+            :class="loginStatusCodeError === 401 ? 'label-error' : ''"
+          >
+            {{ $t('password') }}
+          </label>
           <input
             id="password"
             v-model="password"
+            class="ease-out duration-200"
+            :class="loginStatusCodeError === 401 ? 'input-error' : ''"
             name="password"
             type="password"
             autocomplete="current-password"
@@ -54,29 +68,33 @@
           </div>
 
           <div>
-            <a href="#" class="text-sm link">{{ $t('forgot-password') }}</a>
+            <a href="#" class="text-sm block link fl-upper">
+              {{ $t('forgot-password') }}
+            </a>
           </div>
         </div>
 
         <div>
           <button
+            :disabled="signInDisabled"
             type="submit"
             class="group relative w-full btn-primary fl-upper"
           >
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <!-- Heroicon name: lock-closed -->
+              <!-- Heroicon name: login -->
               <svg
-                class="h-5 w-5 text-purple-600 group-hover:text-blue-500"
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
               >
                 <path
-                  fill-rule="evenodd"
-                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                  clip-rule="evenodd"
-                />
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                ></path>
               </svg>
             </span>
             {{ $t('sign-in') }}
@@ -88,7 +106,70 @@
 </template>
 
 <script>
-export default {}
+import global from '~/mixins.js/global'
+
+export default {
+  mixins: [global],
+  data() {
+    return {
+      emailOrUsername: '',
+      password: '',
+      loginStatusCodeError: null,
+      signInDisabled: false,
+    }
+  },
+  methods: {
+    async signIn() {
+      this.signInDisabled = true
+      const data = this.getDataToLogin()
+
+      try {
+        const res = await this.$auth.loginWith('local', { data })
+        this.loginStatusCodeError = res.status
+        await this.$auth.setUserToken(res.data.token, '')
+        await this.$axios.setHeader('token', res.data.token)
+      } catch (error) {
+        this.loginStatusCodeError = error.response.status
+
+        if (error.response.status !== 401) {
+          this.$nuxt.error({
+            statusCode: this.loginStatusCodeError,
+            message: error.response.request.statusText,
+          })
+        } else {
+          console.log('incorrect username or password')
+        }
+      }
+      this.signInDisabled = false
+    },
+    getDataToLogin() {
+      const data = {
+        email: undefined,
+        userName: undefined,
+        password: undefined,
+      }
+
+      this.isTryingLoginWithEmail()
+        ? (data.email = this.emailOrUsername)
+        : (data.userName = this.emailOrUsername)
+      data.password = this.password
+      this.deleteUndefinedPropsOfObject(data)
+
+      return data
+    },
+    isTryingLoginWithEmail() {
+      return this.emailOrUsername.includes('@')
+    },
+  },
+}
 </script>
 
-<style></style>
+<style>
+.input-error {
+  @apply border-red-500 !important;
+}
+
+.label-error {
+  @apply text-red-500 !important;
+}
+</style>
