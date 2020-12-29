@@ -4,6 +4,10 @@ export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
 
+  server: {
+    port: 3009,
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'ten-boards-front',
@@ -31,13 +35,41 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    '@nuxtjs/proxy',
     'nuxt-i18n',
   ],
 
   i18n: i18nOptions,
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: '/api',
+    proxy: true,
+  },
+
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3000/',
+      pathRewrite: { '^/api': '' },
+    },
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/api/users/login',
+            method: 'post',
+            propertyName: 'data.token',
+          },
+          user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false,
+        },
+      },
+    },
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},

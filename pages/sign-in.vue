@@ -13,15 +13,16 @@
           <a href="#" class="link">{{ $t('sign-up') }}</a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form class="mt-8 space-y-6" method="POST" @submit.prevent="signIn">
         <input type="hidden" name="remember" value="true" />
         <div class="group">
-          <label for="email-address">
+          <label for="emailOrUsername">
             {{ $t('email') + ' ' + $t('or') + ' ' + $t('username') }}
           </label>
           <input
-            id="email-address"
-            name="email"
+            id="emailOrUsername"
+            v-model="emailOrUsername"
+            name="emailOrUsername"
             type="text"
             autocomplete="email"
             required
@@ -31,6 +32,7 @@
           <label for="password">{{ $t('password') }}</label>
           <input
             id="password"
+            v-model="password"
             name="password"
             type="password"
             autocomplete="current-password"
