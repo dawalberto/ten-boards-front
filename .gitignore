@@ -91,3 +91,4 @@ sw.*
 
 # customs
 tmp/
+pages/tests.vue
