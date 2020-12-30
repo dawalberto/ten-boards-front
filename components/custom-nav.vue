@@ -201,6 +201,7 @@ export default {
   },
   methods: {
     async logOut() {
+      this.showUserOptions = false
       await this.$auth.logout()
     },
   },
