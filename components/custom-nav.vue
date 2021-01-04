@@ -114,7 +114,7 @@
                   @click="showUserOptions = !showUserOptions"
                 >
                   <span class="sr-only">Open user menu</span>
-                  <avatar :svg="this.$auth.user.avatar" />
+                  <userAvatar :svg="this.$auth.user.avatar" />
                 </button>
               </div>
               <!--
@@ -189,10 +189,10 @@
 </template>
 
 <script>
-import avatar from '~/components/avatar.vue'
+import userAvatar from '~/components/user-avatar.vue'
 
 export default {
-  components: { avatar },
+  components: { userAvatar },
   data() {
     return {
       showUserOptions: false,
