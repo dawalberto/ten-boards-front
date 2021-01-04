@@ -65,7 +65,7 @@
               <NuxtLink to="/" class="nav-link nav-link-current">
                 {{ $t('summary') }}
               </NuxtLink>
-              <NuxtLink to="/" class="nav-link nav-link-default">
+              <NuxtLink to="/boards" class="nav-link nav-link-default">
                 {{ $t('boards') }}
               </NuxtLink>
             </div>
@@ -180,7 +180,7 @@
         <NuxtLink to="/" class="nav-link nav-link-current block">{{
           $t('summary')
         }}</NuxtLink>
-        <NuxtLink to="/" class="nav-link nav-link-default block">{{
+        <NuxtLink to="/boards" class="nav-link nav-link-default block">{{
           $t('boards')
         }}</NuxtLink>
       </div>
