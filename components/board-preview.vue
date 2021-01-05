@@ -1,6 +1,6 @@
 <template>
   <div
-    class="group px-6 py-4 flex flex-col sm:flex-row justify-between items-center cursor-pointer bg-gradient-to-r hover:from-blue-500 hover:to-purple-600"
+    class="group px-6 py-4 flex flex-col sm:flex-row justify-between items-center cursor-pointer bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:shadow-md rounded-b-md"
   >
     <div class="flex-1 self-start md:self-center">
       <p class="font-bold group-hover:text-white">{{ title }}</p>
