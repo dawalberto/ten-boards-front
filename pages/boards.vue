@@ -29,7 +29,7 @@
           :class="seeingUnfinishedBoards ? 'text-white' : 'text-gray-300'"
           @click="showUnfinishedBoards"
         >
-          <span class="text-xl">{{ totalFinishedBoards }}</span>
+          <span class="text-xl">{{ totalUnfinishedBoards }}</span>
           {{ $t('open') }}
         </p>
         <p
@@ -37,7 +37,7 @@
           :class="!seeingUnfinishedBoards ? 'text-white' : 'text-gray-300'"
           @click="showFinishedBoards"
         >
-          <span class="text-xl">{{ totalUnfinishedBoards }}</span>
+          <span class="text-xl">{{ totalFinishedBoards }}</span>
           {{ $t('finished') }}
         </p>
       </div>
