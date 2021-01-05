@@ -11,5 +11,9 @@
   "or": "or",
   "password": "password",
   "email": "email",
-  "username": "username"
+  "username": "username",
+  "new-board": "new board",
+  "open": "open",
+  "finished": "finished",
+  "updated-at": "updated at"
 }

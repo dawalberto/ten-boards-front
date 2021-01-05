@@ -11,5 +11,9 @@
   "or": "o",
   "password": "contraseña",
   "email": "email",
-  "username": "nombre de usuario"
+  "username": "nombre de usuario",
+  "new-board": "nuevo tablero",
+  "open": "abiertos",
+  "finished": "finalizados",
+  "updated-at": "última actualizacion"
 }
