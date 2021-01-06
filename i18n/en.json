@@ -15,5 +15,13 @@
   "new-board": "new board",
   "open": "open",
   "finished": "finished",
-  "updated-at": "updated at"
+  "updated-at": "updated at",
+  "dates": {
+    "updated": {
+      "now": "updated now",
+      "minutes": "updated 1 minute ago | updated {n} minutes ago",
+      "hours": "updated 1 hour ago | updated {n} hours ago",
+      "days": "updated 1 day ago | updated {n} days ago"
+    }
+  }
 }
