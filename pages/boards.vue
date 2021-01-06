@@ -7,7 +7,7 @@
     </div>
     <div class="flex flex-col w-full mt-2 rounded-md shadow-md">
       <div
-        class="rounded-t-md p-4 flex justify-start items-center bg-gradient-to-r from-blue-500 to-purple-600"
+        class="rounded-t-md py-4 px-6 flex justify-start items-center bg-gradient-to-r from-blue-500 to-purple-600"
       >
         <!-- Heroicons: clipboard-list -->
         <svg
