@@ -49,23 +49,43 @@
           class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
         >
           <div class="flex-shrink-0 flex items-center">
-            <img
-              class="block lg:hidden h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-              alt="Workflow"
-            />
-            <img
-              class="hidden lg:block h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-              alt="Workflow"
-            />
+            <NuxtLink to="/">
+              <img
+                class="block lg:hidden h-8 w-auto"
+                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                alt="Workflow"
+              />
+            </NuxtLink>
+            <NuxtLink to="/">
+              <img
+                class="hidden lg:block h-8 w-auto"
+                src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                alt="Workflow"
+              />
+            </NuxtLink>
           </div>
           <div class="hidden sm:block sm:ml-6">
             <div class="flex space-x-4">
-              <NuxtLink to="/" class="nav-link nav-link-current">
+              <NuxtLink
+                to="/summary"
+                :class="
+                  currentPath === 'sumary'
+                    ? 'nav-link-current'
+                    : 'nav-link-default'
+                "
+                class="nav-link"
+              >
                 {{ $t('summary') }}
               </NuxtLink>
-              <NuxtLink to="/boards" class="nav-link nav-link-default">
+              <NuxtLink
+                to="/boards"
+                :class="
+                  currentPath === 'boards'
+                    ? 'nav-link-current'
+                    : 'nav-link-default'
+                "
+                class="nav-link"
+              >
                 {{ $t('boards') }}
               </NuxtLink>
             </div>
@@ -75,10 +95,26 @@
           class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
         >
           <template v-if="!this.$auth.loggedIn">
-            <NuxtLink to="/sign-in" class="nav-link nav-link-default">
+            <NuxtLink
+              to="/sign-in"
+              :class="
+                currentPath === 'sign-in'
+                  ? 'nav-link-current'
+                  : 'nav-link-default'
+              "
+              class="nav-link"
+            >
               {{ $t('sign-in') }}
             </NuxtLink>
-            <NuxtLink to="/" class="nav-link nav-link-default">
+            <NuxtLink
+              to="/sign-up"
+              :class="
+                currentPath === 'sign-up'
+                  ? 'nav-link-current'
+                  : 'nav-link-default'
+              "
+              class="nav-link"
+            >
               {{ $t('sign-up') }}
             </NuxtLink>
           </template>
@@ -177,12 +213,22 @@
     <div :class="showMenuOptions ? 'block' : 'hidden'" class="sm:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <NuxtLink to="/" class="nav-link nav-link-current block">{{
-          $t('summary')
-        }}</NuxtLink>
-        <NuxtLink to="/boards" class="nav-link nav-link-default block">{{
-          $t('boards')
-        }}</NuxtLink>
+        <NuxtLink
+          to="/"
+          :class="
+            currentPath === 'summary' ? 'nav-link-current' : 'nav-link-default'
+          "
+          class="nav-link block"
+          >{{ $t('summary') }}</NuxtLink
+        >
+        <NuxtLink
+          to="/boards"
+          :class="
+            currentPath === 'boards' ? 'nav-link-current' : 'nav-link-default'
+          "
+          class="nav-link block"
+          >{{ $t('boards') }}</NuxtLink
+        >
       </div>
     </div>
   </nav>
@@ -198,6 +244,11 @@ export default {
       showUserOptions: false,
       showMenuOptions: false,
     }
+  },
+  computed: {
+    currentPath() {
+      return this.$route.path.slice(1)
+    },
   },
   methods: {
     async logOut() {
