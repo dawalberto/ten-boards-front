@@ -5,7 +5,7 @@
         v-for="data of summary"
         :key="data.board._id"
         :to="`/board/${data.board._id}`"
-        class="summary_board bg-primary"
+        class="summary_board bg-primary interactive-container"
       >
         <h1 class="summary_board-title">
           <span class="summary_total">
@@ -74,7 +74,7 @@ export default {
 }
 
 .summary_board {
-  @apply p-4 rounded-md shadow-md transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105;
+  @apply p-4 rounded-md shadow-md;
 }
 
 .summary_lists {

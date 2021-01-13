@@ -1,7 +1,7 @@
 <template>
   <NuxtLink
     :to="`/board/${idBoard}`"
-    class="py-2 px-4 flex flex-col sm:flex-row justify-between items-center cursor-pointer bg-gradient-to-r hover:from-blue-50 hover:to-purple-100 hover:shadow-md rounded-b-md"
+    class="py-2 px-4 flex flex-col sm:flex-row justify-between items-center cursor-pointer bg-gradient-to-r hover:from-blue-50 hover:to-purple-100 hover:shadow-md rounded-md interactive-container"
   >
     <div class="flex-1 self-start md:self-center">
       <p class="font-bold">{{ title }}</p>

@@ -17,6 +17,10 @@
         from-blue-500
         to-purple-600;
     }
+
+    .interactive-container {
+        @apply transition duration-500 ease-in-out transform hover:-translate-y-0.5;
+    }
 }
 
 @layer components {
