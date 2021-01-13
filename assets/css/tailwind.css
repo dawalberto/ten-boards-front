@@ -36,9 +36,7 @@
 
     .btn-primary {
         @apply btn;
-        @apply bg-gradient-to-r 
-        from-blue-500 
-        to-purple-600 
+        @apply bg-primary
         focus:ring-blue-500;
     }
 
@@ -50,9 +48,7 @@
     .link {
         @apply text-gradient 
         font-medium 
-        bg-gradient-to-r 
-        from-blue-500 
-        to-purple-600 
+        bg-primary
         hover:from-purple-600 
         hover:to-blue-500 
         border-b-2
