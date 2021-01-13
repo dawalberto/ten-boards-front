@@ -16,21 +16,8 @@
         />
       </div>
     </div>
-    <h1 class="text-xl text-gray-500">
-      <svg
-        class="w-6 h-6 inline mb-0.5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1"
-          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-        ></path>
-      </svg>
+    <h1 class="text-xl text-gray-500 mt-2">
+      <SvgIcon :name="'clock'" :extra-classes="'mb-0.5'" />
       <span>
         {{ board.totalTime }}
         {{ $tc('dates.measures.hours', board.totalTime) }}
@@ -41,20 +28,11 @@
         <h1 class="font-bold">{{ list.title }}</h1>
         <div v-for="card of list.cards" :key="card._id" class="board_card">
           <p>
-            <svg
-              class="w-5 h-5 inline text-gray-500 mb-0.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
+            <SvgIcon
+              :name="'clock'"
+              :size="5"
+              :extra-classes="'mb-0.5 text-gray-500'"
+            />
             <span class="text-sm text-gray-500">{{ card.time }} h</span>
           </p>
           <p>{{ card.description }}</p>
@@ -77,9 +55,10 @@
 </template>
 
 <script>
+import SvgIcon from '~/components/svg-icon.vue'
 import userAvatar from '~/components/user-avatar.vue'
 export default {
-  components: { userAvatar },
+  components: { userAvatar, SvgIcon },
   filters: {
     getMemberTitle(member) {
       let departments = member.departments

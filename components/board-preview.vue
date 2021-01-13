@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import dateAt from './date-at.vue'
+import dateAt from '~/components/date-at.vue'
 
 export default {
   components: { dateAt },
