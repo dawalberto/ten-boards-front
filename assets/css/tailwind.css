@@ -7,6 +7,16 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+
+    .fl-upper::first-letter {
+        text-transform: uppercase;
+    }
+
+    .bg-primary {
+        @apply bg-gradient-to-r
+        from-blue-500
+        to-purple-600;
+    }
 }
 
 @layer components {
@@ -37,10 +47,6 @@
         hover:from-purple-600;
     }
 
-    .fl-upper::first-letter {
-        text-transform: uppercase;
-    }
-
     .link {
         @apply text-gradient 
         font-medium 
@@ -62,7 +68,6 @@
         @apply text-center 
         text-3xl 
         font-extrabold 
-        text-gray-900;
     }
 
     input[type='text'],
@@ -91,7 +96,13 @@
         fl-upper;
     }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
     p {
-        @apply text-gray-700;
+        @apply text-gray-800;
     }
 }
