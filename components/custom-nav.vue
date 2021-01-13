@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-gradient-to-r from-blue-500 to-purple-600">
+  <nav class="bg-primary sticky top-0 z-10">
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -69,7 +69,7 @@
               <NuxtLink
                 to="/summary"
                 :class="
-                  currentPath === 'sumary'
+                  currentPath === 'summary'
                     ? 'nav-link-current'
                     : 'nav-link-default'
                 "
@@ -173,7 +173,7 @@
               >
                 <div
                   v-show="showUserOptions"
-                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
+                  class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 z-10"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu"

@@ -22,6 +22,11 @@
       "minutes": "updated 1 minute ago | updated {n} minutes ago",
       "hours": "updated 1 hour ago | updated {n} hours ago",
       "days": "updated 1 day ago | updated {n} days ago"
+    },
+    "measures": {
+      "now": "now",
+      "minutes": "minute | minutes",
+      "hours": "hour | hours "
     }
   }
 }

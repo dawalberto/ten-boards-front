@@ -44,6 +44,7 @@
       <board-preview
         v-for="board of boards"
         :key="board._id"
+        :id-board="board._id"
         :title="board.title"
         :updated-at="board.updatedAt"
         :description="board.description"

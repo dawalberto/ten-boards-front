@@ -1,24 +1,35 @@
 <template>
   <div>
-    <div class="summary">
-      <div
+    <div class="summary_summary">
+      <NuxtLink
         v-for="data of summary"
         :key="data.board._id"
-        class="board bg-primary"
+        :to="`/board/${data.board._id}`"
+        class="summary_board bg-primary"
       >
-        <h1 class="board-title">
-          <span class="total">{{ data.board | totalCardsOnBoard }}</span>
+        <h1 class="summary_board-title">
+          <span class="summary_total">
+            {{ data.board | totalCardsOnBoard }}
+          </span>
           {{ data.board.title }}
         </h1>
-        <div class="lists">
-          <div v-for="list of data.board.lists" :key="list._id" class="list">
+        <div class="summary_lists">
+          <div
+            v-for="list of data.board.lists"
+            :key="list._id"
+            class="summary_list"
+          >
             <h1 class="font-semibold">{{ list.title }}</h1>
-            <div v-for="card of list.cards" :key="card._id" class="card">
+            <div
+              v-for="card of list.cards"
+              :key="card._id"
+              class="summary_card"
+            >
               <p>{{ card.description }}</p>
             </div>
           </div>
         </div>
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -58,32 +69,32 @@ export default {
 </script>
 
 <style>
-.summary {
+.summary_summary {
   @apply grid gap-4 grid-cols-1 md:grid-cols-2 w-full min-h-full place-content-center;
 }
 
-.board {
-  @apply p-4 rounded-md shadow-md;
+.summary_board {
+  @apply p-4 rounded-md shadow-md transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105;
 }
 
-.lists {
+.summary_lists {
   @apply lg:grid lg:gap-4 lg:grid-cols-2 md:my-4;
 }
 
-.list {
+.summary_list {
   @apply p-4 my-2 lg:m-0 rounded-md border-2 border-indigo-700 border-opacity-50 shadow-md;
   backdrop-filter: blur(20rem);
 }
 
-.card {
+.summary_card {
   @apply p-2 mt-2 rounded-sm bg-gray-50 shadow-md;
 }
 
-.board-title {
+.summary_board-title {
   @apply lg:mb-2 text-lg text-gray-50;
 }
 
-.total {
+.summary_total {
   @apply inline-block rounded-full h-7 w-7 text-center text-gray-700 bg-gray-50 shadow-md;
 }
 </style>

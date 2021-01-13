@@ -1,5 +1,5 @@
 <template>
-  <span class="w-9 h-9" v-html="svg"></span>
+  <span :class="`w-${size} h-${size}`" v-html="svg"></span>
 </template>
 
 <script>
@@ -8,6 +8,10 @@ export default {
     svg: {
       type: String,
       default: null,
+    },
+    size: {
+      type: Number,
+      default: 9,
     },
   },
 }
