@@ -6,7 +6,10 @@
         :key="data.board._id"
         class="board bg-primary"
       >
-        <h1 class="board-title">{{ data.board.title }}</h1>
+        <h1 class="board-title">
+          <span class="total">{{ data.board | totalCardsOnBoard }}</span>
+          {{ data.board.title }}
+        </h1>
         <div class="lists">
           <div v-for="list of data.board.lists" :key="list._id" class="list">
             <h1 class="font-semibold">{{ list.title }}</h1>
@@ -22,6 +25,15 @@
 
 <script>
 export default {
+  filters: {
+    totalCardsOnBoard(board) {
+      let totalCards = 0
+      board.lists.forEach((list) => {
+        totalCards += list.cards.length
+      })
+      return totalCards
+    },
+  },
   data() {
     return {
       summary: [],
@@ -55,7 +67,7 @@ export default {
 }
 
 .lists {
-  @apply lg:grid lg:gap-4 lg:grid-cols-2;
+  @apply lg:grid lg:gap-4 lg:grid-cols-2 md:my-4;
 }
 
 .list {
@@ -64,10 +76,14 @@ export default {
 }
 
 .card {
-  @apply p-2 mt-2 rounded-md bg-gray-50 shadow-md;
+  @apply p-2 mt-2 rounded-sm bg-gray-50 shadow-md;
 }
 
 .board-title {
   @apply lg:mb-2 text-lg text-gray-50;
+}
+
+.total {
+  @apply inline-block rounded-full h-7 w-7 text-center text-gray-700 bg-gray-50 shadow-md;
 }
 </style>
