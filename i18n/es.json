@@ -28,5 +28,7 @@
       "minutes": "minuto | minutos",
       "hours": "hora | horas "
     }
-  }  
+  },
+  "accept": "aceptar",
+  "cancel": "cancelar"
 }

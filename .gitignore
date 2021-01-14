@@ -91,4 +91,5 @@ sw.*
 
 # customs
 tmp/
-pages/tests.vue
+pages/test.vue
+components/test-component.vue
