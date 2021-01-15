@@ -11,11 +11,11 @@
       <div class="flex h-12 items-center bg-primary rounded-t-md">
         <h1 class="ml-2 text-white text-lg capitalize">{{ $t(title) }}</h1>
       </div>
-      <div class="p-4">
+      <div class="p-4 h-5/6 overflow-y-scroll overflow-x-hidden">
         <slot></slot>
       </div>
       <div
-        class="flex content-end p-4 absolute bottom-0 left-0 flex-row-reverse w-full"
+        class="flex content-end p-4 absolute bottom-0 left-0 flex-row-reverse w-full bg-white rounded-b-md"
       >
         <button class="btn ml-2 capitalize bg-green-400" @click="accept">
           {{ $t('accept') }}

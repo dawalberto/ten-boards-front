@@ -30,5 +30,6 @@
     }
   },
   "accept": "aceptar",
-  "cancel": "cancelar"
+  "cancel": "cancelar",
+  "selected": "seleccionado | seleccionados"
 }
