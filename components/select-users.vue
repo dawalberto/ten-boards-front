@@ -54,11 +54,22 @@ export default {
       type: Array,
       default: () => [],
     },
+    getUsersSelected: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       usersSelected: [],
     }
+  },
+  watch: {
+    getUsersSelected(newValue) {
+      if (newValue) {
+        this.$emit('usersSelected', this.usersSelected)
+      }
+    },
   },
   methods: {
     search(input) {
