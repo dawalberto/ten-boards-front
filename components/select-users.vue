@@ -26,11 +26,17 @@
       <div
         v-for="user of usersSelected"
         :key="user._id"
-        class="flex items-end mt-2"
+        class="flex items-end mt-2 p-1"
       >
         <UserAvatar :svg="user.avatar" :size="7" class="mr-2" />
         <span class="mr-4">{{ user.userName }}</span>
-        <span>{{ user.name }}</span>
+        <span class="flex-grow">{{ user.name }}</span>
+        <div
+          class="flex rounded-full cursor-pointer p-0.5 hover:bg-red-400 hover:text-white"
+          @click="removeUserFromUsersSelectedById(user._id)"
+        >
+          <SvgIcon :name="'trash'" />
+        </div>
       </div>
     </div>
   </div>
@@ -39,9 +45,10 @@
 <script>
 import Autocomplete from '@trevoreyre/autocomplete-vue'
 import UserAvatar from '~/components/user-avatar.vue'
+import SvgIcon from '~/components/svg-icon'
 
 export default {
-  components: { Autocomplete, UserAvatar },
+  components: { Autocomplete, UserAvatar, SvgIcon },
   props: {
     users: {
       type: Array,
@@ -70,10 +77,14 @@ export default {
     },
     onSelectUser(user) {
       this.usersSelected.push(user)
-      alert(user.userName)
     },
     getResultValue() {
       return ''
+    },
+    removeUserFromUsersSelectedById(userId) {
+      this.usersSelected = this.usersSelected.filter(
+        (user) => user._id != userId
+      )
     },
   },
 }
