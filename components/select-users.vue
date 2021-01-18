@@ -33,7 +33,7 @@
         <span class="flex-grow">{{ user.name }}</span>
         <div
           class="flex rounded-full cursor-pointer p-0.5 hover:bg-red-400 hover:text-white"
-          @click="removeUserFromUsersSelectedById(user._id)"
+          @click="removeUserFromUsersSelected(user)"
         >
           <SvgIcon :name="'trash'" />
         </div>
@@ -86,16 +86,20 @@ export default {
         )
       })
     },
-    onSelectUser(user) {
-      this.usersSelected.push(user)
+    onSelectUser(userSelected) {
+      this.usersSelected.push(userSelected)
+
+      this.users = this.users.filter((user) => user._id != userSelected._id)
     },
     getResultValue() {
       return ''
     },
-    removeUserFromUsersSelectedById(userId) {
+    removeUserFromUsersSelected(userToRemoveFromSelected) {
       this.usersSelected = this.usersSelected.filter(
-        (user) => user._id != userId
+        (user) => user._id != userToRemoveFromSelected._id
       )
+
+      this.users.push(userToRemoveFromSelected)
     },
   },
 }
