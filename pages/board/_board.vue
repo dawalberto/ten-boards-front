@@ -1,51 +1,72 @@
 <template>
-  <div class="board_board">
-    <div>
-      <h1 class="board_title">{{ board.title }}</h1>
-      <p class="board_description">{{ board.description }}</p>
-    </div>
-    <div class="mt-4">
-      <div class="board_member">
-        <user-avatar
-          v-for="member of board.members"
-          :key="member._id"
-          :svg="member.avatar"
-          :size="8"
-          class="mr-2 cursor-pointer"
-          :title="member | getMemberTitle"
-        />
+  <div>
+    <PopUpWindow v-if="showPopUp" @accept="acceptPopUp" @cancel="cancelPopUp">
+      <SelectUsers
+        :users="board.members"
+        :get-users-selected="getUsersSelected"
+        @usersSelected="users"
+      />
+    </PopUpWindow>
+    <div class="board_board">
+      <div>
+        <h1 class="board_title">{{ board.title }}</h1>
+        <p class="board_description">{{ board.description }}</p>
       </div>
-    </div>
-    <h1 class="text-xl text-gray-500 mt-2">
-      <SvgIcon :name="'clock'" :extra-classes="'mb-0.5'" />
-      <span>
-        {{ board.totalTime }}
-        {{ $tc('dates.measures.hours', board.totalTime) }}
-      </span>
-    </h1>
-    <div class="board_lists">
-      <div v-for="list of board.lists" :key="list._id" class="board_list">
-        <h1 class="font-bold">{{ list.title }}</h1>
-        <div v-for="card of list.cards" :key="card._id" class="board_card">
-          <p>
-            <SvgIcon
-              :name="'clock'"
-              :size="5"
-              :extra-classes="'mb-0.5 text-gray-500'"
-            />
-            <span class="text-sm text-gray-500">{{ card.time }} h</span>
-          </p>
-          <p>{{ card.description }}</p>
-          <div class="board_card-members">
-            <div class="flex rounded-full">
-              <user-avatar
-                v-for="memberCard of getArrayObjectsMembersOfCard(card.members)"
-                :key="memberCard._id"
-                :svg="memberCard.avatar"
+      <div class="mt-4">
+        <div class="board_member">
+          <UserAvatar
+            v-for="member of board.members"
+            :key="member._id"
+            :svg="member.avatar"
+            :size="8"
+            class="mr-2 cursor-pointer"
+            :title="member | getMemberTitle"
+          />
+        </div>
+      </div>
+      <h1 class="text-xl text-gray-500 mt-2">
+        <SvgIcon :name="'clock'" :extra-classes="'mb-0.5'" />
+        <span>
+          {{ board.totalTime }}
+          {{ $tc('dates.measures.hours', board.totalTime) }}
+        </span>
+      </h1>
+      <div class="board_lists">
+        <div v-for="list of board.lists" :key="list._id" class="board_list">
+          <h1 class="font-bold">{{ list.title }}</h1>
+          <div v-for="card of list.cards" :key="card._id" class="board_card">
+            <p>
+              <SvgIcon
+                :name="'clock'"
                 :size="5"
-                class="board_card-member-avatar"
-                :title="memberCard | getMemberTitle"
+                :extra-classes="'mb-0.5 text-gray-500'"
               />
+              <span class="text-sm text-gray-500">{{ card.time }} h</span>
+            </p>
+            <p>{{ card.description }}</p>
+            <button
+              class="absolute top-0 right-0 interactive-container"
+              @click="getCardIdListIdToAddMembers(card._id, list._id)"
+            >
+              <SvgIcon
+                :name="'user-add'"
+                :size="5"
+                :extra-classes="'text-gray-500'"
+              />
+            </button>
+            <div class="board_card-members">
+              <div class="flex rounded-full">
+                <UserAvatar
+                  v-for="memberCard of getArrayObjectsMembersOfCard(
+                    card.members
+                  )"
+                  :key="memberCard._id"
+                  :svg="memberCard.avatar"
+                  :size="5"
+                  class="board_card-member-avatar"
+                  :title="memberCard | getMemberTitle"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -56,9 +77,12 @@
 
 <script>
 import SvgIcon from '~/components/svg-icon.vue'
-import userAvatar from '~/components/user-avatar.vue'
+import UserAvatar from '~/components/user-avatar.vue'
+import SelectUsers from '~/components/select-users'
+import PopUpWindow from '~/components/pop-up-window'
+
 export default {
-  components: { userAvatar, SvgIcon },
+  components: { UserAvatar, SvgIcon, PopUpWindow, SelectUsers },
   filters: {
     getMemberTitle(member) {
       let departments = member.departments
@@ -71,6 +95,9 @@ export default {
     return {
       boardId: '',
       board: {},
+      showPopUp: false,
+      getUsersSelected: false,
+      cardToAddMembers: {},
     }
   },
   created() {
@@ -105,6 +132,34 @@ export default {
       })
 
       return members
+    },
+    acceptPopUp() {
+      this.getUsersSelected = true
+    },
+    cancelPopUp() {
+      this.showPopUp = false
+    },
+    users(data) {
+      console.log(data)
+      this.addMembersToCard(data)
+      this.showPopUp = false
+    },
+    getCardIdListIdToAddMembers(cardId, listId) {
+      this.showPopUp = true
+      this.cardToAddMembers = { cardId, listId }
+    },
+    addMembersToCard(members) {
+      members = members.map((member) => member._id)
+
+      this.board.lists.forEach((list) => {
+        if (list._id === this.cardToAddMembers.listId) {
+          list.cards.forEach((card) => {
+            if (card._id === this.cardToAddMembers.cardId) {
+              card.members = card.members.concat(members)
+            }
+          })
+        }
+      })
     },
   },
 }
