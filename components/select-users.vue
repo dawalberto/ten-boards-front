@@ -61,15 +61,19 @@ export default {
   },
   data() {
     return {
+      usersToSelect: [],
       usersSelected: [],
     }
   },
   watch: {
     getUsersSelected(newValue) {
       if (newValue) {
-        this.$emit('usersSelected', this.usersSelected)
+        this.$parent.$emit('childAccept', this.usersSelected)
       }
     },
+  },
+  mounted() {
+    this.usersToSelect = this.users
   },
   methods: {
     search(input) {
@@ -78,7 +82,7 @@ export default {
       }
 
       input = input.toLowerCase()
-      return this.users.filter((user) => {
+      return this.usersToSelect.filter((user) => {
         return (
           user.name.toLowerCase().includes(input) ||
           user.userName.toLowerCase().startsWith(input) ||
@@ -89,7 +93,9 @@ export default {
     onSelectUser(userSelected) {
       this.usersSelected.push(userSelected)
 
-      this.users = this.users.filter((user) => user._id != userSelected._id)
+      this.usersToSelect = this.usersToSelect.filter(
+        (user) => user._id != userSelected._id
+      )
     },
     getResultValue() {
       return ''
@@ -99,7 +105,7 @@ export default {
         (user) => user._id != userToRemoveFromSelected._id
       )
 
-      this.users.push(userToRemoveFromSelected)
+      this.usersToSelect.push(userToRemoveFromSelected)
     },
   },
 }

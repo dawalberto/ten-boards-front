@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     accept() {
-      this.$emit('accept', this.dataToReturn)
+      this.$emit('accept')
     },
     cancel() {
       this.$emit('cancel')
