@@ -1,10 +1,14 @@
 <template>
   <div>
-    <PopUpWindow v-if="showPopUp" @accept="acceptPopUp" @cancel="cancelPopUp">
+    <PopUpWindow
+      v-if="showPopUpAddMembers"
+      @accept="acceptPopUpAddMembers"
+      @childAccept="childAcceptPopUpAddMembers"
+      @cancel="cancelPopUpPopUpAddMembers"
+    >
       <SelectUsers
         :users="board.members"
-        :get-users-selected="getUsersSelected"
-        @usersSelected="users"
+        :get-users-selected="getMembersToAddToCard"
       />
     </PopUpWindow>
     <div class="board_board">
@@ -80,6 +84,7 @@ import SvgIcon from '~/components/svg-icon.vue'
 import UserAvatar from '~/components/user-avatar.vue'
 import SelectUsers from '~/components/select-users'
 import PopUpWindow from '~/components/pop-up-window'
+import global from '~/mixins.js/global'
 
 export default {
   components: { UserAvatar, SvgIcon, PopUpWindow, SelectUsers },
@@ -91,12 +96,13 @@ export default {
       return ` 👨🏻‍💻 ${member.userName} \n 🙋🏻‍♂️ ${member.name} \n 📧 ${member.email} ${departments}`
     },
   },
+  mixins: [global],
   data() {
     return {
       boardId: '',
       board: {},
-      showPopUp: false,
-      getUsersSelected: false,
+      showPopUpAddMembers: false,
+      getMembersToAddToCard: false,
       cardToAddMembers: {},
     }
   },
@@ -133,19 +139,21 @@ export default {
 
       return members
     },
-    acceptPopUp() {
-      this.getUsersSelected = true
+    acceptPopUpAddMembers() {
+      this.getMembersToAddToCard = true
     },
-    cancelPopUp() {
-      this.showPopUp = false
+    cancelPopUpPopUpAddMembers() {
+      this.showPopUpAddMembers = false
     },
-    users(data) {
-      console.log(data)
-      this.addMembersToCard(data)
-      this.showPopUp = false
+    childAcceptPopUpAddMembers(members) {
+      if (members) {
+        this.addMembersToCard(members)
+      }
+      this.getMembersToAddToCard = false
+      this.showPopUpAddMembers = false
     },
     getCardIdListIdToAddMembers(cardId, listId) {
-      this.showPopUp = true
+      this.showPopUpAddMembers = true
       this.cardToAddMembers = { cardId, listId }
     },
     addMembersToCard(members) {
@@ -155,7 +163,10 @@ export default {
         if (list._id === this.cardToAddMembers.listId) {
           list.cards.forEach((card) => {
             if (card._id === this.cardToAddMembers.cardId) {
-              card.members = card.members.concat(members)
+              card.members = this.getMergedArraysWithoutDuplicates(
+                card.members,
+                members
+              )
             }
           })
         }
