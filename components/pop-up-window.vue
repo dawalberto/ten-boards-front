@@ -17,7 +17,10 @@
       <div
         class="flex content-end p-4 absolute bottom-0 left-0 flex-row-reverse w-full bg-white rounded-b-md"
       >
-        <button class="btn ml-2 capitalize bg-green-400" @click="accept">
+        <button
+          class="btn ml-2 capitalize rounded-lg bg-green-400"
+          @click="accept"
+        >
           {{ $t('accept') }}
         </button>
         <button class="btn capitalize bg-red-400" @click="cancel">

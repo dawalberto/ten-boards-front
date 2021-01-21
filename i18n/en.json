@@ -31,5 +31,6 @@
   },
   "accept": "accept",
   "cancel": "cancel",
-  "selected": "selected"
+  "selected": "selected",
+  "add-members": "add members"
 }

@@ -2,6 +2,7 @@
   <div>
     <PopUpWindow
       v-if="showPopUpAddMembers"
+      :title="'add-members'"
       @accept="acceptPopUpAddMembers"
       @childAccept="childAcceptPopUpAddMembers"
       @cancel="cancelPopUpPopUpAddMembers"
