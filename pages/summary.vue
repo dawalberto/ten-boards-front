@@ -19,7 +19,7 @@
             :key="list._id"
             class="summary_list"
           >
-            <h1 class="font-semibold">{{ list.title }}</h1>
+            <h1 class="font-semibold text-gray-200">{{ list.title }}</h1>
             <div
               v-for="card of list.cards"
               :key="card._id"
@@ -74,7 +74,7 @@ export default {
 }
 
 .summary_board {
-  @apply p-4 rounded-md shadow-md;
+  @apply p-4 rounded-md shadow-xl;
 }
 
 .summary_lists {

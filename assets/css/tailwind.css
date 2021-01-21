@@ -19,7 +19,7 @@
     }
 
     .interactive-container {
-        @apply transition duration-500 ease-in-out transform hover:-translate-y-0.5;
+        @apply transition duration-200 ease-in-out transform hover:-translate-y-0.5;
     }
 }
 
