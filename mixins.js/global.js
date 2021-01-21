@@ -16,5 +16,8 @@ export default {
 
       return mergedArrays.map((e) => JSON.parse(e))
     },
+    cloneObject(objectToClone) {
+      return JSON.parse(JSON.stringify(objectToClone))
+    },
   },
 }

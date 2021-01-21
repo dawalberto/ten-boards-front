@@ -164,14 +164,25 @@ export default {
         if (list._id === this.cardToAddMembers.listId) {
           list.cards.forEach((card) => {
             if (card._id === this.cardToAddMembers.cardId) {
+              let oldMembers = this.cloneObject(card.members)
               card.members = this.getMergedArraysWithoutDuplicates(
                 card.members,
                 members
               )
+
+              this.updateCard(card._id, card)
+                .then(() => alert('member added correctly'))
+                .catch(() => {
+                  card.members = oldMembers
+                  alert('something went wrong during the card update')
+                })
             }
           })
         }
       })
+    },
+    async updateCard(cardId, cardData) {
+      return await this.$axios.put(`/api/cards/${cardId}`, cardData)
     },
   },
 }
