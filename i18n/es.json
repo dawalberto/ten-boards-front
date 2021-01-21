@@ -32,5 +32,9 @@
   "accept": "aceptar",
   "cancel": "cancelar",
   "selected": "seleccionado | seleccionados",
-  "add-members": "agregar miembros"
+  "add-members": "agregar miembros",
+  "delete-member": "quitar miembro",
+  "cards": {
+    "delete-member": "¿Quieres quitar a {name}({userName}) de esta tarjeta?"
+  }  
 }

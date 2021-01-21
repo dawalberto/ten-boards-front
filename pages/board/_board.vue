@@ -1,16 +1,26 @@
 <template>
   <div>
     <PopUpWindow
-      v-if="showPopUpAddMembers"
-      :title="'add-members'"
-      @accept="acceptPopUpAddMembers"
-      @childAccept="childAcceptPopUpAddMembers"
-      @cancel="cancelPopUpPopUpAddMembers"
+      v-if="showPopUpAddMembersToCard"
+      :title-header="'add-members'"
+      :size-popup="'medium'"
+      @accept="acceptPopUpAddMembersToCard"
+      @childAccept="childAcceptPopUpAddMembersToCard"
+      @cancel="cancelPopUpPopUpAddMembersToCard"
     >
       <SelectUsers
         :users="board.members"
         :get-users-selected="getMembersToAddToCard"
       />
+    </PopUpWindow>
+    <PopUpWindow
+      v-if="showPopUpDeleteMemberFromCard"
+      :title-header="'delete-member'"
+      :size-popup="'small'"
+      @accept="acceptPopUpDeleteMemberFromCard"
+      @cancel="cancelPopUpPopUpDeleteMemberFromCard"
+    >
+      <p class="fl-upper">{{ messageDeleteMemberFromCard }}</p>
     </PopUpWindow>
     <div class="board_board">
       <div>
@@ -70,6 +80,7 @@
                   :size="5"
                   class="board_card-member-avatar"
                   :title="memberCard | getMemberTitle"
+                  @click.native="askDeleteMemberFromCard(memberCard, card)"
                 />
               </div>
             </div>
@@ -102,9 +113,12 @@ export default {
     return {
       boardId: '',
       board: {},
-      showPopUpAddMembers: false,
+      showPopUpAddMembersToCard: false,
       getMembersToAddToCard: false,
       cardToAddMembers: {},
+      showPopUpDeleteMemberFromCard: false,
+      messageDeleteMemberFromCard: '',
+      memberToDeleteFromCard: {},
     }
   },
   created() {
@@ -140,21 +154,21 @@ export default {
 
       return members
     },
-    acceptPopUpAddMembers() {
+    acceptPopUpAddMembersToCard() {
       this.getMembersToAddToCard = true
     },
-    cancelPopUpPopUpAddMembers() {
-      this.showPopUpAddMembers = false
+    cancelPopUpPopUpAddMembersToCard() {
+      this.showPopUpAddMembersToCard = false
     },
-    childAcceptPopUpAddMembers(members) {
+    childAcceptPopUpAddMembersToCard(members) {
       if (members) {
         this.addMembersToCard(members)
       }
       this.getMembersToAddToCard = false
-      this.showPopUpAddMembers = false
+      this.showPopUpAddMembersToCard = false
     },
     getCardIdListIdToAddMembers(cardId, listId) {
-      this.showPopUpAddMembers = true
+      this.showPopUpAddMembersToCard = true
       this.cardToAddMembers = { cardId, listId }
     },
     addMembersToCard(members) {
@@ -170,12 +184,10 @@ export default {
                 members
               )
 
-              this.updateCard(card._id, card)
-                .then(() => alert('member added correctly'))
-                .catch(() => {
-                  card.members = oldMembers
-                  alert('something went wrong during the card update')
-                })
+              this.updateCard(card._id, card).catch(() => {
+                card.members = oldMembers
+                alert('something went wrong during the card update')
+              })
             }
           })
         }
@@ -183,6 +195,31 @@ export default {
     },
     async updateCard(cardId, cardData) {
       return await this.$axios.put(`/api/cards/${cardId}`, cardData)
+    },
+    askDeleteMemberFromCard(member, card) {
+      this.messageDeleteMemberFromCard = this.$t('cards.delete-member', {
+        name: member.name,
+        userName: member.userName,
+      })
+      this.memberToDeleteFromCard = { member, card }
+      this.showPopUpDeleteMemberFromCard = true
+    },
+    cancelPopUpPopUpDeleteMemberFromCard() {
+      this.showPopUpDeleteMemberFromCard = false
+    },
+    acceptPopUpDeleteMemberFromCard() {
+      let card = this.memberToDeleteFromCard.card
+      card.members = card.members.filter((memberId) => {
+        return memberId !== this.memberToDeleteFromCard.member._id
+      })
+
+      this.updateCard(card._id, card)
+        .then(() => {
+          this.showPopUpDeleteMemberFromCard = false
+        })
+        .catch(() => {
+          alert('something went wrong during the card update')
+        })
     },
   },
 }
