@@ -38,6 +38,7 @@ export default {
     '@nuxtjs/auth-next',
     '@nuxtjs/proxy',
     'nuxt-i18n',
+    'portal-vue/nuxt',
   ],
 
   i18n: i18nOptions,

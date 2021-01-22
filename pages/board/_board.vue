@@ -1,27 +1,7 @@
 <template>
   <div>
-    <PopUpWindow
-      v-if="showPopUpAddMembersToCard"
-      :title-header="'add-members'"
-      :size-popup="'medium'"
-      @accept="acceptPopUpAddMembersToCard"
-      @childAccept="childAcceptPopUpAddMembersToCard"
-      @cancel="cancelPopUpPopUpAddMembersToCard"
-    >
-      <SelectUsers
-        :users="board.members"
-        :get-users-selected="getMembersToAddToCard"
-      />
-    </PopUpWindow>
-    <PopUpWindow
-      v-if="showPopUpDeleteMemberFromCard"
-      :title-header="'delete-member'"
-      :size-popup="'small'"
-      @accept="acceptPopUpDeleteMemberFromCard"
-      @cancel="cancelPopUpPopUpDeleteMemberFromCard"
-    >
-      <p class="fl-upper">{{ messageDeleteMemberFromCard }}</p>
-    </PopUpWindow>
+    <portal-target name="popup-add-members-to-card"></portal-target>
+    <portal-target name="popup-delete-member-from-card"></portal-target>
     <div class="board_board">
       <div>
         <h1 class="board_title">{{ board.title }}</h1>
@@ -49,42 +29,13 @@
       <div class="board_lists">
         <div v-for="list of board.lists" :key="list._id" class="board_list">
           <h1 class="font-bold">{{ list.title }}</h1>
-          <div v-for="card of list.cards" :key="card._id" class="board_card">
-            <p>
-              <SvgIcon
-                :name="'clock'"
-                :size="5"
-                :extra-classes="'mb-0.5 text-gray-500'"
-              />
-              <span class="text-sm text-gray-500">{{ card.time }} h</span>
-            </p>
-            <p>{{ card.description }}</p>
-            <button
-              class="absolute top-0 right-0 interactive-container"
-              @click="getCardIdListIdToAddMembers(card._id, list._id)"
-            >
-              <SvgIcon
-                :name="'user-add'"
-                :size="5"
-                :extra-classes="'text-gray-500'"
-              />
-            </button>
-            <div class="board_card-members">
-              <div class="flex rounded-full">
-                <UserAvatar
-                  v-for="memberCard of getArrayObjectsMembersOfCard(
-                    card.members
-                  )"
-                  :key="memberCard._id"
-                  :svg="memberCard.avatar"
-                  :size="5"
-                  class="board_card-member-avatar"
-                  :title="memberCard | getMemberTitle"
-                  @click.native="askDeleteMemberFromCard(memberCard, card)"
-                />
-              </div>
-            </div>
-          </div>
+          <CardDetails
+            v-for="card of list.cards"
+            :key="card._id"
+            :board="board"
+            :list="list"
+            :card="card"
+          />
         </div>
       </div>
     </div>
@@ -94,12 +45,11 @@
 <script>
 import SvgIcon from '~/components/svg-icon.vue'
 import UserAvatar from '~/components/user-avatar.vue'
-import SelectUsers from '~/components/select-users'
-import PopUpWindow from '~/components/pop-up-window'
+import CardDetails from '~/components/card-details'
 import global from '~/mixins.js/global'
 
 export default {
-  components: { UserAvatar, SvgIcon, PopUpWindow, SelectUsers },
+  components: { UserAvatar, SvgIcon, CardDetails },
   filters: {
     getMemberTitle(member) {
       let departments = member.departments
@@ -113,12 +63,6 @@ export default {
     return {
       boardId: '',
       board: {},
-      showPopUpAddMembersToCard: false,
-      getMembersToAddToCard: false,
-      cardToAddMembers: {},
-      showPopUpDeleteMemberFromCard: false,
-      messageDeleteMemberFromCard: '',
-      memberToDeleteFromCard: {},
     }
   },
   created() {
@@ -140,103 +84,18 @@ export default {
         })
         .catch((error) => console.log(error))
     },
-    getArrayObjectsMembersOfCard(cardMembers) {
-      const members = []
-
-      cardMembers.forEach((idMember) => {
-        let memberFound = this.board.members.find(
-          (member) => member._id === idMember
-        )
-        if (memberFound) {
-          members.push(memberFound)
-        }
-      })
-
-      return members
-    },
-    acceptPopUpAddMembersToCard() {
-      this.getMembersToAddToCard = true
-    },
-    cancelPopUpPopUpAddMembersToCard() {
-      this.showPopUpAddMembersToCard = false
-    },
-    childAcceptPopUpAddMembersToCard(members) {
-      if (members) {
-        this.addMembersToCard(members)
-      }
-      this.getMembersToAddToCard = false
-      this.showPopUpAddMembersToCard = false
-    },
-    getCardIdListIdToAddMembers(cardId, listId) {
-      this.showPopUpAddMembersToCard = true
-      this.cardToAddMembers = { cardId, listId }
-    },
-    addMembersToCard(members) {
-      members = members.map((member) => member._id)
-
-      this.board.lists.forEach((list) => {
-        if (list._id === this.cardToAddMembers.listId) {
-          list.cards.forEach((card) => {
-            if (card._id === this.cardToAddMembers.cardId) {
-              let oldMembers = this.cloneObject(card.members)
-              card.members = this.getMergedArraysWithoutDuplicates(
-                card.members,
-                members
-              )
-
-              this.updateCard(card._id, card).catch(() => {
-                card.members = oldMembers
-                alert('something went wrong during the card update')
-              })
-            }
-          })
-        }
-      })
-    },
-    async updateCard(cardId, cardData) {
-      return await this.$axios.put(`/api/cards/${cardId}`, cardData)
-    },
-    askDeleteMemberFromCard(member, card) {
-      this.messageDeleteMemberFromCard = this.$t('cards.delete-member', {
-        name: member.name,
-        userName: member.userName,
-      })
-      this.memberToDeleteFromCard = { member, card }
-      this.showPopUpDeleteMemberFromCard = true
-    },
-    cancelPopUpPopUpDeleteMemberFromCard() {
-      this.showPopUpDeleteMemberFromCard = false
-    },
-    acceptPopUpDeleteMemberFromCard() {
-      let card = this.memberToDeleteFromCard.card
-      card.members = card.members.filter((memberId) => {
-        return memberId !== this.memberToDeleteFromCard.member._id
-      })
-
-      this.updateCard(card._id, card)
-        .then(() => {
-          this.showPopUpDeleteMemberFromCard = false
-        })
-        .catch(() => {
-          alert('something went wrong during the card update')
-        })
-    },
   },
 }
 </script>
 
 <style>
 .board_lists {
-  @apply grid gap-4 grid-cols-1  md:grid-cols-2 w-full min-h-full place-content-center md:my-4;
+  @apply grid gap-4 grid-cols-1 md:grid-cols-2 w-full min-h-full place-content-center md:my-4;
 }
 
 .board_list {
   @apply p-4 my-2 lg:m-0 rounded-md border-2 border-indigo-700 border-opacity-50 shadow-md;
   backdrop-filter: blur(20rem);
-}
-
-.board_card {
-  @apply p-2 mt-3 rounded-sm bg-gray-50 shadow-md relative;
 }
 
 .board_title {
@@ -249,13 +108,5 @@ export default {
 
 .board_member {
   @apply flex rounded-full;
-}
-
-.board_card-members {
-  @apply absolute right-0 bottom-2 z-10;
-}
-
-.board_card-member-avatar {
-  @apply mr-2 cursor-pointer ring-2 ring-offset-2 ring-indigo-700 ring-opacity-50 ring-white rounded-full;
 }
 </style>
