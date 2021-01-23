@@ -16,6 +16,8 @@ module.exports = {
       opacity: ['disabled'],
       cursor: ['disabled'],
       scale: ['active'],
+      boxShadow: ['active'],
+      outline: ['active'],
     },
   },
   plugins: [],

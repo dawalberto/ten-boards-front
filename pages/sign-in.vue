@@ -26,7 +26,7 @@
           <input
             id="emailOrUsername"
             v-model="emailOrUsername"
-            class="ease-out duration-200"
+            class="ease-out duration-200 input-form"
             :class="loginStatusCodeError === 401 ? 'input-error' : ''"
             name="emailOrUsername"
             type="text"
@@ -45,7 +45,7 @@
           <input
             id="password"
             v-model="password"
-            class="ease-out duration-200"
+            class="ease-out duration-200 input-form"
             :class="loginStatusCodeError === 401 ? 'input-error' : ''"
             name="password"
             type="password"
