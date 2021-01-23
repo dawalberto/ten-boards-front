@@ -28,13 +28,20 @@
     </portal>
 
     <div class="board_card">
-      <p>
+      <p class="text-gray-500 text-sm" @dblclick="focusCardTimeInput">
         <SvgIcon
           :name="'clock'"
           :size="5"
-          :extra-classes="'mb-0.5 text-gray-500'"
+          :extra-classes="'mb-0.5 cursor-pointer'"
         />
-        <span class="text-sm text-gray-500">{{ card.time }} h</span>
+        <input
+          ref="cardTimeInput"
+          :value="card.time"
+          :disabled="cardTimeInputDisabled"
+          type="text"
+          class="bg-transparent w-10 focus:ring-2 focus:ring-indigo-600 rounded focus:outline-none disabled:cursor-pointer"
+          @blur="updateCardTime(card, $event.target.value)"
+        />
       </p>
       <p>{{ card.description }}</p>
       <button
@@ -105,6 +112,7 @@ export default {
       getMembersToAddToCard: false,
       messageDeleteMemberFromCard: '',
       memberToDeleteFromCard: {},
+      cardTimeInputDisabled: true,
     }
   },
   methods: {
@@ -188,6 +196,23 @@ export default {
     },
     cancelPopUpPopUpDeleteMemberFromCard() {
       this.showPopUpDeleteMemberFromCard = false
+    },
+    updateCardTime(card, cardTime) {
+      card.time = cardTime
+      this.updateCard(card._id, card)
+        .then(() => {
+          this.cardTimeInputDisabled = true
+          this.$emit('refreshBoard')
+        })
+        .catch(() => {
+          alert('something went wrong during the card update')
+        })
+    },
+    focusCardTimeInput() {
+      this.cardTimeInputDisabled = false
+      setTimeout(() => {
+        this.$refs.cardTimeInput.focus()
+      }, 1)
     },
   },
 }

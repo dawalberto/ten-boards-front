@@ -35,6 +35,7 @@
             :board="board"
             :list="list"
             :card="card"
+            @refreshBoard="refreshBoard"
           />
         </div>
       </div>
@@ -83,6 +84,9 @@ export default {
           this.board = response.data.board
         })
         .catch((error) => console.log(error))
+    },
+    refreshBoard() {
+      this.fetchBoardById()
     },
   },
 }
