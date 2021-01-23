@@ -15,6 +15,7 @@ module.exports = {
       borderStyle: ['focus'],
       opacity: ['disabled'],
       cursor: ['disabled'],
+      scale: ['active'],
     },
   },
   plugins: [],

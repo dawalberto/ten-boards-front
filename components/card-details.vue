@@ -43,6 +43,7 @@
       >
         <SvgIcon
           :name="'user-add'"
+          :title="$t('add-members')"
           :size="5"
           :extra-classes="'text-gray-500'"
         />
