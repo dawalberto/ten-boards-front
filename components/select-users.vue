@@ -91,11 +91,13 @@ export default {
       })
     },
     onSelectUser(userSelected) {
-      this.usersSelected.push(userSelected)
+      if (userSelected) {
+        this.usersSelected.push(userSelected)
 
-      this.usersToSelect = this.usersToSelect.filter(
-        (user) => user._id != userSelected._id
-      )
+        this.usersToSelect = this.usersToSelect.filter(
+          (user) => user._id != userSelected._id
+        )
+      }
     },
     getResultValue() {
       return ''
