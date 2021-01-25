@@ -62,7 +62,7 @@
             :key="memberCard._id"
             :svg="memberCard.avatar"
             :size="5"
-            class="board_card-member-avatar"
+            class="board_card-member-avatar interactive-avatar"
             :title="memberCard | getMemberTitle"
             @click.native="askDeleteMemberFromCard(memberCard, card)"
           />
@@ -228,6 +228,6 @@ export default {
 }
 
 .board_card-member-avatar {
-  @apply mr-2 cursor-pointer ring-2 ring-offset-2 ring-indigo-700 ring-opacity-50 ring-white rounded-full;
+  @apply mr-2 cursor-pointer ring-2 ring-offset-2 ring-indigo-600 ring-opacity-95 ring-white rounded-full;
 }
 </style>

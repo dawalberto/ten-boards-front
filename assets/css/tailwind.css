@@ -21,6 +21,10 @@
     .interactive-container {
         @apply transition duration-200 ease-in-out transform hover:-translate-y-0.5;
     }
+
+    .interactive-avatar {
+        @apply hover:shadow-xl hover:scale-110 transform active:shadow-none active:scale-100;
+    }
 }
 
 @layer components {

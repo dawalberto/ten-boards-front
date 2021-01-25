@@ -2,7 +2,7 @@
   <div>
     <portal-target name="popup-add-members-to-card"></portal-target>
     <portal-target name="popup-delete-member-from-card"></portal-target>
-    <div class="board_board">
+    <div>
       <div>
         <h1 class="board_title">{{ board.title }}</h1>
         <p class="board_description">{{ board.description }}</p>
@@ -98,8 +98,8 @@ export default {
 }
 
 .board_list {
-  @apply p-4 my-2 lg:m-0 rounded-md border-2 border-indigo-700 border-opacity-50 shadow-md;
-  backdrop-filter: blur(20rem);
+  @apply p-4 my-2 lg:m-0 rounded border-2 border-indigo-600;
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.75);
 }
 
 .board_title {

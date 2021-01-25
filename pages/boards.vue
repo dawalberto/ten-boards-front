@@ -1,13 +1,20 @@
 <template>
   <div>
+    <img
+      src="~/assets/images/scrum_board_isometric.svg"
+      class="w-full md:w-2/4 h-auto fixed bottom-0 right-0 z-0 opacity-70"
+      alt="scrum board board"
+    />
     <div class="flex w-full flex-row-reverse">
       <button class="btn-primary fl-upper">
         {{ $t('new-board') }}
       </button>
     </div>
-    <div class="flex flex-col w-full mt-2 rounded-md shadow-md">
+    <div
+      class="flex flex-col w-full mt-2 rounded-md shadow-xl boards-preview-container"
+    >
       <div
-        class="rounded-t-md py-4 px-6 flex justify-start items-center bg-gradient-to-r from-blue-500 to-purple-600"
+        class="rounded-t-md py-4 px-6 flex justify-start items-center bg-gradient-to-r from-blue-500 to-purple-600 z-10"
       >
         <SvgIcon
           :name="'clipboard-list'"
@@ -92,4 +99,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.boards-preview-container {
+  backdrop-filter: blur(0.3rem);
+}
+</style>

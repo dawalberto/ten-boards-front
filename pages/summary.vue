@@ -1,11 +1,16 @@
 <template>
   <div>
+    <img
+      src="~/assets/images/scrum_board_flatline.svg"
+      class="w-full md:w-2/4 h-auto fixed bottom-0 right-0 z-0 opacity-80"
+      alt="scrum board"
+    />
     <div class="summary_summary">
       <NuxtLink
         v-for="data of summary"
         :key="data.board._id"
         :to="`/board/${data.board._id}`"
-        class="summary_board bg-primary interactive-container"
+        class="summary_board interactive-container"
       >
         <h1 class="summary_board-title">
           <span class="summary_total">
@@ -17,7 +22,7 @@
           <div
             v-for="list of data.board.lists"
             :key="list._id"
-            class="summary_list"
+            class="summary_list bg-primary"
           >
             <h1 class="font-semibold text-gray-200">{{ list.title }}</h1>
             <div
@@ -74,7 +79,8 @@ export default {
 }
 
 .summary_board {
-  @apply p-4 rounded-md shadow-xl;
+  @apply p-4 rounded shadow-xl border-2 border-indigo-600 border-opacity-80;
+  backdrop-filter: blur(0.3rem);
 }
 
 .summary_lists {
@@ -82,8 +88,7 @@ export default {
 }
 
 .summary_list {
-  @apply p-4 my-2 lg:m-0 rounded-md border-2 border-indigo-700 border-opacity-50 shadow-md;
-  backdrop-filter: blur(20rem);
+  @apply p-4 my-2 lg:m-0 rounded shadow-md;
 }
 
 .summary_card {
@@ -91,10 +96,10 @@ export default {
 }
 
 .summary_board-title {
-  @apply lg:mb-2 text-lg text-gray-50;
+  @apply lg:mb-2 text-lg;
 }
 
 .summary_total {
-  @apply inline-block rounded-full h-7 w-7 text-center text-gray-700 bg-gray-50 shadow-md;
+  @apply inline-block rounded-full h-7 w-7 text-center text-gray-700 bg-gray-50 shadow-lg;
 }
 </style>
