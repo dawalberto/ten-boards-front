@@ -1,9 +1,8 @@
 <template>
   <div>
-    <img
-      src="~/assets/images/scrum_board_isometric.svg"
-      class="w-full md:w-2/4 h-auto fixed bottom-0 right-0 z-0 opacity-70"
-      alt="scrum board board"
+    <BackgroundImage
+      :src-image="`scrum_board_isometric.svg`"
+      :alt-image="'scrum board'"
     />
     <div class="flex w-full flex-row-reverse">
       <button class="btn-primary fl-upper">
@@ -51,7 +50,10 @@
 </template>
 
 <script>
+import BackgroundImage from '~/components/background-image'
+
 export default {
+  components: { BackgroundImage },
   data() {
     return {
       boards: [],

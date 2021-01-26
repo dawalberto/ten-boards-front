@@ -1,9 +1,8 @@
 <template>
   <div>
-    <img
-      src="~/assets/images/scrum_board_flatline.svg"
-      class="w-full md:w-2/4 h-auto fixed bottom-0 right-0 z-0 opacity-80"
-      alt="scrum board"
+    <BackgroundImage
+      :src-image="`scrum_board_flatline.svg`"
+      :alt-image="'scrum board'"
     />
     <div class="summary_summary">
       <NuxtLink
@@ -40,7 +39,10 @@
 </template>
 
 <script>
+import BackgroundImage from '~/components/background-image'
+
 export default {
+  components: { BackgroundImage },
   filters: {
     totalCardsOnBoard(board) {
       let totalCards = 0
