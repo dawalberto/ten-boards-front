@@ -29,10 +29,13 @@
       </h1>
       <div class="board_lists">
         <div v-for="list of board.lists" :key="list._id" class="board_list">
-          <h1 class="font-bold">{{ list.title }}</h1>
+          <h1 class="font-bold sticky top-0 p-2 z-10 bg-indigo-600 text-white">
+            {{ list.title }}
+          </h1>
           <CardDetails
             v-for="card of list.cards"
             :key="card._id"
+            class="mx-2"
             :board="board"
             :list="list"
             :card="card"
@@ -95,12 +98,13 @@ export default {
 
 <style>
 .board_lists {
-  @apply grid gap-4 grid-cols-1 md:grid-cols-2 w-full min-h-full place-content-center md:my-4;
+  @apply grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full min-h-full place-content-center md:my-4;
 }
 
 .board_list {
-  @apply p-4 my-2 lg:m-0 rounded border-2 border-indigo-600;
+  @apply my-2 lg:m-0 rounded border-2 border-indigo-600 overflow-x-hidden overflow-y-scroll;
   box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.75);
+  max-height: 50rem;
 }
 
 .board_title {
