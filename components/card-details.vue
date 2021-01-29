@@ -26,6 +26,17 @@
         <p class="fl-upper">{{ messageDeleteMemberFromCard }}</p>
       </PopUpWindow>
     </portal>
+    <portal to="popup-delete-card">
+      <PopUpWindow
+        v-if="showPopUpDeleteCard"
+        :title-header="'cards.delete'"
+        :size-popup="'small'"
+        @accept="acceptPopUpDeleteCard"
+        @cancel="cancelPopUpPopUpDeleteCard"
+      >
+        <p class="fl-upper">{{ $t('cards.delete-confirm') }}</p>
+      </PopUpWindow>
+    </portal>
 
     <div class="board_card">
       <div class="flex items-center justify-between">
@@ -44,7 +55,7 @@
             @blur="updateCardTime(card, $event.target.value)"
           />
         </div>
-        <button class="btn" :title="$t('cards.delete')">
+        <button class="btn" :title="$t('cards.delete')" @click="askDeleteCard">
           <SvgIcon :name="'trash'" :size="4" :extra-classes="'text-gray-500'" />
         </button>
       </div>
@@ -116,6 +127,7 @@ export default {
     return {
       showPopUpAddMembersToCard: false,
       showPopUpDeleteMemberFromCard: false,
+      showPopUpDeleteCard: false,
       cardToAddMembers: {},
       getMembersToAddToCard: false,
       messageDeleteMemberFromCard: '',
@@ -158,6 +170,9 @@ export default {
     },
     async updateCard(cardId, cardData) {
       return await this.$axios.put(`/api/cards/${cardId}`, cardData)
+    },
+    async deleteCard(cardId) {
+      return await this.$axios.delete(`/api/cards/${cardId}`)
     },
     cancelPopUpPopUpAddMembersToCard() {
       this.showPopUpAddMembersToCard = false
@@ -221,6 +236,21 @@ export default {
       setTimeout(() => {
         this.$refs.cardTimeInput.focus()
       }, 1)
+    },
+    askDeleteCard() {
+      this.showPopUpDeleteCard = true
+    },
+    acceptPopUpDeleteCard() {
+      this.deleteCard(this.card._id)
+        .then(() => {
+          this.$emit('refreshBoard')
+        })
+        .catch(() => {
+          alert('something went wrong during the card delete')
+        })
+    },
+    cancelPopUpPopUpDeleteCard() {
+      this.showPopUpDeleteCard = false
     },
   },
 }

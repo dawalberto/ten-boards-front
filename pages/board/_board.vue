@@ -2,6 +2,7 @@
   <div>
     <portal-target name="popup-add-members-to-card"></portal-target>
     <portal-target name="popup-delete-member-from-card"></portal-target>
+    <portal-target name="popup-delete-card"></portal-target>
     <div>
       <div>
         <h1 class="board_title">{{ board.title }}</h1>
