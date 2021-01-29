@@ -15,7 +15,7 @@
             :key="member._id"
             :svg="member.avatar"
             :size="8"
-            class="mr-2 cursor-pointer"
+            class="-mr-1 cursor-pointer"
             :title="member | getMemberTitle"
           />
         </div>
