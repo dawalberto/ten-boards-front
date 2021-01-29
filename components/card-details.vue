@@ -28,45 +28,53 @@
     </portal>
 
     <div class="board_card">
-      <p class="text-gray-500 text-sm" @dblclick="focusCardTimeInput">
-        <SvgIcon
-          :name="'clock'"
-          :size="5"
-          :extra-classes="'mb-0.5 cursor-pointer'"
-        />
-        <input
-          ref="cardTimeInput"
-          :value="card.time"
-          :disabled="cardTimeInputDisabled"
-          type="text"
-          class="bg-transparent w-10 focus:ring-2 focus:ring-indigo-600 rounded focus:outline-none disabled:cursor-pointer"
-          @blur="updateCardTime(card, $event.target.value)"
-        />
-      </p>
-      <p>{{ card.description }}</p>
-      <button
-        class="absolute top-0 right-0 interactive-container"
-        @click="getCardIdListIdToAddMembers(card._id, list._id)"
-      >
-        <SvgIcon
-          :name="'user-add'"
-          :title="$t('add-members')"
-          :size="5"
-          :extra-classes="'text-gray-500'"
-        />
-      </button>
-      <div class="board_card-members">
-        <div class="flex rounded-full">
-          <UserAvatar
-            v-for="memberCard of getArrayObjectsMembersOfCard(card.members)"
-            :key="memberCard._id"
-            :svg="memberCard.avatar"
+      <div class="flex items-center justify-between">
+        <div class="text-gray-500 text-sm" @click="focusCardTimeInput">
+          <SvgIcon
+            :name="'clock'"
             :size="5"
-            class="board_card-member-avatar interactive-avatar"
-            :title="memberCard | getMemberTitle"
-            @click.native="askDeleteMemberFromCard(memberCard, card)"
+            :extra-classes="'mb-0.5 cursor-pointer'"
+          />
+          <input
+            ref="cardTimeInput"
+            :value="card.time"
+            :disabled="cardTimeInputDisabled"
+            type="text"
+            class="bg-transparent w-10 focus:ring-2 focus:ring-indigo-600 rounded focus:outline-none disabled:cursor-pointer"
+            @blur="updateCardTime(card, $event.target.value)"
           />
         </div>
+        <button class="btn" :title="$t('cards.delete')">
+          <SvgIcon :name="'trash'" :size="4" :extra-classes="'text-gray-500'" />
+        </button>
+      </div>
+      <p class="bg-white rounded p-2 mt-2 mb-2">{{ card.description }}</p>
+      <div class="flex items-center justify-end">
+        <div class="board_card-members">
+          <div class="flex rounded-full">
+            <UserAvatar
+              v-for="memberCard of getArrayObjectsMembersOfCard(card.members)"
+              :key="memberCard._id"
+              :svg="memberCard.avatar"
+              :size="5"
+              class="board_card-member-avatar interactive-avatar"
+              :title="memberCard | getMemberTitle"
+              @click.native="askDeleteMemberFromCard(memberCard, card)"
+            />
+          </div>
+        </div>
+        <button
+          class="btn"
+          :title="$t('add-members')"
+          @click="getCardIdListIdToAddMembers(card._id, list._id)"
+        >
+          <SvgIcon
+            :name="'user-add'"
+            :title="$t('add-members')"
+            :size="4"
+            :extra-classes="'text-gray-500'"
+          />
+        </button>
       </div>
     </div>
   </div>
@@ -220,14 +228,15 @@ export default {
 
 <style>
 .board_card {
-  @apply p-2 mt-3 rounded-sm bg-gray-50 shadow-md relative;
+  @apply p-2 mt-3 rounded-sm bg-gray-100 shadow-md relative;
 }
 
 .board_card-members {
-  @apply absolute right-0 bottom-2 z-10;
+  @apply z-10 mr-4;
+  /* @apply absolute right-2 bottom-2 z-10; */
 }
 
 .board_card-member-avatar {
-  @apply mr-2 cursor-pointer ring-2 ring-offset-2 ring-indigo-600 ring-opacity-95 ring-white rounded-full;
+  @apply -ml-0.5 cursor-pointer ring-2 ring-offset-2 ring-indigo-600 ring-opacity-95 ring-white rounded-full;
 }
 </style>

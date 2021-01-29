@@ -35,6 +35,8 @@
   "add-members": "add members",
   "delete-member": "delete member",
   "cards": {
-    "delete-member": "do you want to remove {name}({userName}) from the card?"
+    "delete": "delete card",
+    "delete-member": "do you want to remove {name}({userName}) from the card?",
+    "delete-confirm": "do you want to delete the card?"
   }
 }
