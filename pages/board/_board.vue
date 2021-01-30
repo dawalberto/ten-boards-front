@@ -27,6 +27,9 @@
           {{ $tc('dates.measures.hours', board.totalTime) }}
         </span>
       </h1>
+      <div class="flex items-center justify-end">
+        <button class="btn-primary capitalize">{{ $t('new-list') }}</button>
+      </div>
       <div class="board_lists">
         <div v-for="list of board.lists" :key="list._id" class="board_list">
           <h1 class="board_list-title bg-primary">

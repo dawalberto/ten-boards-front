@@ -39,5 +39,6 @@
     "add": "add card",
     "delete-member": "do you want to remove {name}({userName}) from the card?",
     "delete-confirm": "do you want to delete the card?"
-  }
+  },
+  "new-list": "new list"
 }
