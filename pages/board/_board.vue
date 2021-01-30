@@ -30,6 +30,9 @@
       <div class="board_lists">
         <div v-for="list of board.lists" :key="list._id" class="board_list">
           <h1 class="board_list-title bg-primary">
+            <span class="board_list-total-cards">
+              {{ list.cards.length }}
+            </span>
             {{ list.title }}
           </h1>
           <div class="overflow-x-hidden overflow-y-scroll h-full">
@@ -137,5 +140,9 @@ export default {
 
 .board_member {
   @apply flex rounded-full;
+}
+
+.board_list-total-cards {
+  @apply inline-block mr-2 rounded-full h-6 w-6 text-center text-gray-600 bg-gray-50 shadow-lg;
 }
 </style>
