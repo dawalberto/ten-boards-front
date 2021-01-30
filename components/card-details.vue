@@ -59,7 +59,13 @@
           <SvgIcon :name="'trash'" :size="4" :extra-classes="'text-gray-500'" />
         </button>
       </div>
-      <p class="bg-white rounded p-2 mt-2 mb-2">{{ card.description }}</p>
+      <textarea
+        :value="card.description"
+        type="text"
+        class="board_card_description"
+        @blur="updateCardDescription(card, $event.target.value)"
+      >
+      </textarea>
       <div class="flex items-center justify-end">
         <div class="board_card-members">
           <div class="flex rounded-full">
@@ -231,6 +237,16 @@ export default {
           alert('something went wrong during the card update')
         })
     },
+    updateCardDescription(card, cardDescription) {
+      card.description = cardDescription
+      this.updateCard(card._id, card)
+        .then(() => {
+          this.$emit('refreshBoard')
+        })
+        .catch(() => {
+          alert('something went wrong during the card update')
+        })
+    },
     focusCardTimeInput() {
       this.cardTimeInputDisabled = false
       setTimeout(() => {
@@ -268,5 +284,9 @@ export default {
 
 .board_card-member-avatar {
   @apply -ml-0.5 cursor-pointer ring-2 ring-offset-2 ring-indigo-600 ring-opacity-95 ring-white rounded-full;
+}
+
+.board_card_description {
+  @apply bg-white rounded p-2 mt-2 mb-2 w-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-opacity-70;
 }
 </style>

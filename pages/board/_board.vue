@@ -29,7 +29,9 @@
       </h1>
       <div class="board_lists">
         <div v-for="list of board.lists" :key="list._id" class="board_list">
-          <h1 class="font-bold sticky top-0 p-2 z-10 bg-indigo-600 text-white">
+          <h1
+            class="font-bold sticky top-0 p-3 z-10 bg-primary z-20 text-white"
+          >
             {{ list.title }}
           </h1>
           <CardDetails
@@ -98,7 +100,7 @@ export default {
 
 <style>
 .board_lists {
-  @apply grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full min-h-full place-content-center md:my-4;
+  @apply grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full min-h-full place-content-center md:my-4;
 }
 
 .board_list {
