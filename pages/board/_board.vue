@@ -35,6 +35,14 @@
             {{ list.title }}
           </h1>
           <CardDetails
+            class="mx-2 opacity-60"
+            :template="true"
+            :board="board"
+            :list="list"
+            :card="cardTemplate"
+            @refreshBoard="refreshBoard"
+          />
+          <CardDetails
             v-for="card of list.cards"
             :key="card._id"
             class="mx-2"
@@ -70,6 +78,11 @@ export default {
     return {
       boardId: '',
       board: {},
+      cardTemplate: {
+        time: 0,
+        description: '',
+        members: [],
+      },
     }
   },
   created() {
@@ -93,6 +106,7 @@ export default {
     },
     refreshBoard() {
       this.fetchBoardById()
+      this.cardTemplate.description = ''
     },
   },
 }

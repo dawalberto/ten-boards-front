@@ -39,7 +39,7 @@
     </portal>
 
     <div class="board_card">
-      <div class="flex items-center justify-between">
+      <div v-if="!template" class="flex items-center justify-between">
         <div class="text-gray-500 text-sm" @click="focusCardTimeInput">
           <SvgIcon
             :name="'clock'"
@@ -55,8 +55,31 @@
             @blur="updateCardTime(card, $event.target.value)"
           />
         </div>
-        <button class="btn" :title="$t('cards.delete')" @click="askDeleteCard">
-          <SvgIcon :name="'trash'" :size="4" :extra-classes="'text-gray-500'" />
+        <button
+          class="btn-icon"
+          :title="$t('cards.delete')"
+          @click="askDeleteCard"
+        >
+          <SvgIcon
+            :name="'trash'"
+            :size="4"
+            :position="'block'"
+            :extra-classes="'text-gray-500'"
+          />
+        </button>
+      </div>
+      <div v-else class="flex items-center justify-end">
+        <button
+          class="btn-icon-accept"
+          :title="$t('cards.add')"
+          @click="createNewCard"
+        >
+          <SvgIcon
+            :name="'add'"
+            :size="4"
+            :position="'block'"
+            :extra-classes="'text-white'"
+          />
         </button>
       </div>
       <textarea
@@ -66,7 +89,7 @@
         @blur="updateCardDescription(card, $event.target.value)"
       >
       </textarea>
-      <div class="flex items-center justify-end">
+      <div v-if="!template" class="flex items-center justify-end">
         <div class="board_card-members">
           <div class="flex rounded-full">
             <UserAvatar
@@ -81,7 +104,7 @@
           </div>
         </div>
         <button
-          class="btn"
+          class="btn-icon"
           :title="$t('add-members')"
           @click="getCardIdListIdToAddMembers(card._id, list._id)"
         >
@@ -89,6 +112,7 @@
             :name="'user-add'"
             :title="$t('add-members')"
             :size="4"
+            :position="'block'"
             :extra-classes="'text-gray-500'"
           />
         </button>
@@ -127,6 +151,10 @@ export default {
     card: {
       type: Object,
       default: () => {},
+    },
+    template: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -179,6 +207,9 @@ export default {
     },
     async deleteCard(cardId) {
       return await this.$axios.delete(`/api/cards/${cardId}`)
+    },
+    async createCard(cardData) {
+      return await this.$axios.post('/api/cards', cardData)
     },
     cancelPopUpPopUpAddMembersToCard() {
       this.showPopUpAddMembersToCard = false
@@ -239,12 +270,29 @@ export default {
     },
     updateCardDescription(card, cardDescription) {
       card.description = cardDescription
+
+      if (this.template) {
+        return
+      }
+
       this.updateCard(card._id, card)
         .then(() => {
           this.$emit('refreshBoard')
         })
         .catch(() => {
           alert('something went wrong during the card update')
+        })
+    },
+    createNewCard() {
+      const newCard = this.cloneObject(this.card)
+      newCard.list = this.list._id
+
+      this.createCard(newCard)
+        .then(() => {
+          this.$emit('refreshBoard')
+        })
+        .catch(() => {
+          alert('something went wrong during the card creation')
         })
     },
     focusCardTimeInput() {

@@ -36,6 +36,7 @@
   "delete-member": "quitar miembro",
   "cards": {
     "delete": "eliminar tarjeta",
+    "add": "añadir tarjeta",
     "delete-member": "¿Quieres quitar a {name}({userName}) de esta tarjeta?",
     "delete-confirm": "¿Quieres eliminar esta tarjeta?"
   }  

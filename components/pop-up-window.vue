@@ -13,7 +13,7 @@
         class="flex items-center bg-primary rounded-t-md"
         :class="classSizePopUpHeader"
       >
-        <h1 class="ml-2 text-white text-lg capitalize">
+        <h1 class="text-white text-lg capitalize py-1 px-2">
           {{ $t(titleHeader) }}
         </h1>
       </div>

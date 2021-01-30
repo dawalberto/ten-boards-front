@@ -31,12 +31,17 @@
         <UserAvatar :svg="user.avatar" :size="7" class="mr-2" />
         <span class="mr-4">{{ user.userName }}</span>
         <span class="flex-grow">{{ user.name }}</span>
-        <div
-          class="flex rounded-full cursor-pointer p-0.5 hover:bg-red-400 hover:text-white"
+        <button
+          class="btn-icon-cancel"
           @click="removeUserFromUsersSelected(user)"
         >
-          <SvgIcon :name="'trash'" />
-        </div>
+          <SvgIcon
+            :name="'trash'"
+            :size="4"
+            :position="'block'"
+            :extra-classes="'text-white'"
+          />
+        </button>
       </div>
     </div>
   </div>
