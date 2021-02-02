@@ -3,6 +3,15 @@
     <portal-target name="popup-add-members-to-card"></portal-target>
     <portal-target name="popup-delete-member-from-card"></portal-target>
     <portal-target name="popup-delete-card"></portal-target>
+    <PopUpWindow
+      v-if="showPopUpCreateList"
+      title-header="lists.new-title"
+      size-popup="small"
+      @accept="createNewList"
+      @cancel="showPopUpCreateList = false"
+    >
+      <input v-model="newListTitle" type="text" class="input-form" />
+    </PopUpWindow>
     <div>
       <div>
         <h1 class="board_title">{{ board.title }}</h1>
@@ -28,7 +37,12 @@
         </span>
       </h1>
       <div class="flex items-center justify-end">
-        <button class="btn-primary capitalize">{{ $t('new-list') }}</button>
+        <button
+          class="btn-primary capitalize"
+          @click="showPopUpCreateList = true"
+        >
+          {{ $t('lists.new') }}
+        </button>
       </div>
       <div class="board_lists">
         <div v-for="list of board.lists" :key="list._id">
@@ -64,6 +78,8 @@ export default {
     return {
       boardId: '',
       board: {},
+      showPopUpCreateList: false,
+      newListTitle: '',
     }
   },
   created() {
@@ -87,6 +103,27 @@ export default {
     },
     refreshBoard() {
       this.fetchBoardById()
+    },
+    createNewList() {
+      if (!this.newListTitle) {
+        alert('the title of the list cannot be empty')
+        return
+      }
+
+      const newList = {
+        board: this.boardId,
+        title: this.newListTitle,
+      }
+
+      this.$axios
+        .post('/api/lists', newList)
+        .then(() => {
+          this.refreshBoard()
+          this.showPopUpCreateList = false
+        })
+        .catch(() => {
+          alert('something went wrong during the list creation')
+        })
     },
   },
 }

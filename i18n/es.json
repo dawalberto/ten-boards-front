@@ -40,5 +40,8 @@
     "delete-member": "¿Quieres quitar a {name}({userName}) de esta tarjeta?",
     "delete-confirm": "¿Quieres eliminar esta tarjeta?"
   },
-  "new-list": "nueva lista"
+  "lists": {
+    "new": "nueva lista",
+    "new-title": "titulo para la nueva lista"
+  }
 }
