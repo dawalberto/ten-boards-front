@@ -1,10 +1,6 @@
 <template>
   <div>
-    <SvgIcon
-      :name="'clock'"
-      :size="5"
-      :extra-classes="'text-gray-500 mb-0.5'"
-    />
+    <SvgIcon name="clock" :size="5" extra-classes="text-gray-500 mb-0.5" />
     <p :title="messageTitle" class="inline-block text-gray-500 fl-upper">
       {{ message }}
     </p>

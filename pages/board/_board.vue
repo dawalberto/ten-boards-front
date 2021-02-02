@@ -30,7 +30,7 @@
         </div>
       </div>
       <h1 class="text-xl text-gray-500 mt-2">
-        <SvgIcon :name="'clock'" :extra-classes="'mb-0.5'" />
+        <SvgIcon name="clock" extra-classes="mb-0.5" />
         <span>
           {{ board.totalTime }}
           {{ $tc('dates.measures.hours', board.totalTime) }}

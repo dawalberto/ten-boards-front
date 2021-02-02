@@ -36,10 +36,10 @@
           @click="removeUserFromUsersSelected(user)"
         >
           <SvgIcon
-            :name="'trash'"
+            name="trash"
             :size="4"
-            :position="'block'"
-            :extra-classes="'text-white'"
+            position="block"
+            extra-classes="text-white"
           />
         </button>
       </div>

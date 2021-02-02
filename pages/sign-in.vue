@@ -81,7 +81,7 @@
             class="group relative w-full btn-primary fl-upper"
           >
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <SvgIcon :name="'login'" :size="5" />
+              <SvgIcon name="login" :size="5" />
             </span>
             {{ $t('sign-in') }}
           </button>

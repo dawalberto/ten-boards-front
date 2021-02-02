@@ -11,12 +11,12 @@
             <span class="sr-only">Open main menu</span>
             <SvgIcon
               v-show="!showMenuOptions"
-              :name="'menu'"
+              name="menu"
               :class="!showMenuOptions ? 'block' : 'hidden'"
             />
             <SvgIcon
               v-show="showMenuOptions"
-              :name="'x'"
+              name="x"
               :class="showMenuOptions ? 'block' : 'hidden'"
             />
           </button>
@@ -99,7 +99,7 @@
               class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
             >
               <span class="sr-only">View notifications</span>
-              <SvgIcon :name="'bell'" :size="7" />
+              <SvgIcon name="bell" :size="7" />
             </button>
 
             <!-- Profile dropdown -->

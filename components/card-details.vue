@@ -42,9 +42,9 @@
       <div v-if="!template" class="flex items-center justify-between">
         <div class="text-gray-500 text-sm" @click="focusCardTimeInput">
           <SvgIcon
-            :name="'clock'"
+            name="clock"
             :size="5"
-            :extra-classes="'mb-0.5 cursor-pointer'"
+            extra-classes="mb-0.5 cursor-pointer"
           />
           <input
             ref="cardTimeInput"
@@ -61,10 +61,10 @@
           @click="askDeleteCard"
         >
           <SvgIcon
-            :name="'trash'"
+            name="trash"
             :size="4"
-            :position="'block'"
-            :extra-classes="'text-gray-500'"
+            position="block"
+            extra-classes="text-gray-500"
           />
         </button>
       </div>
@@ -75,10 +75,10 @@
           @click="createNewCard"
         >
           <SvgIcon
-            :name="'add'"
+            name="add"
             :size="4"
-            :position="'block'"
-            :extra-classes="'text-white'"
+            position="block"
+            extra-classes="text-white"
           />
         </button>
       </div>
@@ -109,11 +109,11 @@
           @click="getCardIdListIdToAddMembers(card._id, list._id)"
         >
           <SvgIcon
-            :name="'user-add'"
+            name="user-add"
             :title="$t('add-members')"
             :size="4"
-            :position="'block'"
-            :extra-classes="'text-gray-500'"
+            position="block"
+            extra-classes="text-gray-500"
           />
         </button>
       </div>

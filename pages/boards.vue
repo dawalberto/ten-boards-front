@@ -16,9 +16,9 @@
         class="rounded-t-md py-4 px-6 flex justify-start items-center bg-gradient-to-r from-blue-500 to-purple-600 z-10"
       >
         <SvgIcon
-          :name="'clipboard-list'"
+          name="clipboard-list"
           :size="8"
-          :extra-classes="'mr-4 text-white'"
+          extra-classes="mr-4 text-white"
         />
         <p
           class="mr-2 cursor-pointer capitalize"
