@@ -287,6 +287,11 @@ export default {
       const newCard = this.cloneObject(this.card)
       newCard.list = this.list._id
 
+      if (!newCard.description) {
+        alert('the description of the card cannot be empty')
+        return
+      }
+
       this.createCard(newCard)
         .then(() => {
           this.$emit('refreshBoard')
