@@ -42,7 +42,7 @@
   },
   "lists": {
     "new": "nueva lista",
-    "new-title": "titulo para la nueva lista",
+    "new-title": "título para la nueva lista",
     "delete": "eliminar lista",
     "delete-confirm": "¿Quieres eliminar esta lista?"
   }

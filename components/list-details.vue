@@ -12,7 +12,7 @@
       </PopUpWindow>
     </portal>
     <div class="board_list-title bg-primary flex items-center justify-between">
-      <div class="block h-7 w-7 relative mr-2">
+      <div class="flex-none block h-7 w-7 relative mr-4">
         <span class="board_list-total-cards">
           {{ list.cards.length }}
         </span>
@@ -20,9 +20,9 @@
           {{ getTotalCardsOfUserFromList(list) }}
         </span>
       </div>
-      <p>{{ list.title }}</p>
+      <p class="flex-grow font-light text-lg">{{ list.title }}</p>
       <button
-        class="btn-icon"
+        class="btn-icon flex-none"
         :title="$t('lists.delete')"
         @click="showPopUpDeleteList = true"
       >

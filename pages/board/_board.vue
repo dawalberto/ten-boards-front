@@ -12,7 +12,7 @@
       @accept="createNewList"
       @cancel="showPopUpCreateList = false"
     >
-      <input v-model="newListTitle" type="text" class="input-form" />
+      <input v-model="newListTitle" type="text" class="input-form w-full" />
     </PopUpWindow>
     <div>
       <div>
