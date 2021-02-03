@@ -42,6 +42,8 @@
   },
   "lists": {
     "new": "new list",
-    "new-title": "title for the new list"
+    "new-title": "title for the new list",
+    "delete": "delete list",
+    "delete-confirm": "do you want to delete the list?"
   }
 }

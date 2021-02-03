@@ -3,6 +3,8 @@
     <portal-target name="popup-add-members-to-card"></portal-target>
     <portal-target name="popup-delete-member-from-card"></portal-target>
     <portal-target name="popup-delete-card"></portal-target>
+    <portal-target name="popup-delete-list"></portal-target>
+
     <PopUpWindow
       v-if="showPopUpCreateList"
       title-header="lists.new-title"
