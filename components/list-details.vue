@@ -11,6 +11,7 @@
         <p class="fl-upper">{{ messageDeleteList }}</p>
       </PopUpWindow>
     </portal>
+
     <div class="board_list-title bg-primary flex items-center justify-between">
       <div class="flex-none block h-7 w-7 relative mr-4">
         <span class="board_list-total-cards">
@@ -36,7 +37,7 @@
     </div>
     <div class="overflow-x-hidden overflow-y-scroll h-full">
       <CardDetails
-        class="mx-2 opacity-60 mt-16"
+        class="mx-2 opacity-60 mt-20"
         :template="true"
         :board="board"
         :list="list"
