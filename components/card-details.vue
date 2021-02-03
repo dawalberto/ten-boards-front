@@ -3,11 +3,11 @@
     <portal to="popup-add-members-to-card">
       <PopUpWindow
         v-if="showPopUpAddMembersToCard"
-        :title-header="'add-members'"
-        :size-popup="'medium'"
+        title-header="add-members"
+        size-popup="medium"
         @accept="acceptPopUpAddMembersToCard"
         @childAccept="childAcceptPopUpAddMembersToCard"
-        @cancel="cancelPopUpPopUpAddMembersToCard"
+        @cancel="showPopUpAddMembersToCard = false"
       >
         <SelectUsers
           :users="board.members"
@@ -18,10 +18,10 @@
     <portal to="popup-delete-member-from-card">
       <PopUpWindow
         v-if="showPopUpDeleteMemberFromCard"
-        :title-header="'delete-member'"
-        :size-popup="'small'"
+        title-header="delete-member"
+        size-popup="small"
         @accept="acceptPopUpDeleteMemberFromCard"
-        @cancel="cancelPopUpPopUpDeleteMemberFromCard"
+        @cancel="showPopUpDeleteMemberFromCard = false"
       >
         <p class="fl-upper">{{ messageDeleteMemberFromCard }}</p>
       </PopUpWindow>
@@ -29,10 +29,10 @@
     <portal to="popup-delete-card">
       <PopUpWindow
         v-if="showPopUpDeleteCard"
-        :title-header="'cards.delete'"
-        :size-popup="'small'"
+        title-header="cards.delete"
+        size-popup="small"
         @accept="acceptPopUpDeleteCard"
-        @cancel="cancelPopUpPopUpDeleteCard"
+        @cancel="showPopUpDeleteCard = false"
       >
         <p class="fl-upper">{{ $t('cards.delete-confirm') }}</p>
       </PopUpWindow>
@@ -211,9 +211,6 @@ export default {
     async createCard(cardData) {
       return await this.$axios.post('/api/cards', cardData)
     },
-    cancelPopUpPopUpAddMembersToCard() {
-      this.showPopUpAddMembersToCard = false
-    },
     getCardIdListIdToAddMembers(cardId, listId) {
       this.showPopUpAddMembersToCard = true
       this.cardToAddMembers = { cardId, listId }
@@ -253,9 +250,6 @@ export default {
         .catch(() => {
           alert('something went wrong during the card update')
         })
-    },
-    cancelPopUpPopUpDeleteMemberFromCard() {
-      this.showPopUpDeleteMemberFromCard = false
     },
     updateCardTime(card, cardTime) {
       card.time = cardTime
@@ -317,9 +311,6 @@ export default {
         .catch(() => {
           alert('something went wrong during the card delete')
         })
-    },
-    cancelPopUpPopUpDeleteCard() {
-      this.showPopUpDeleteCard = false
     },
   },
 }
