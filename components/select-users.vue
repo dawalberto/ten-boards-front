@@ -1,7 +1,6 @@
 <template>
   <div>
     <Autocomplete
-      id="test"
       :search="search"
       :auto-select="true"
       placeholder="Search for a user"
@@ -120,11 +119,28 @@ export default {
 
 <style>
 .autocomplete {
-  @apply border border-indigo-600 rounded-md px-2 inline-block w-full sticky;
+  /* @apply border border-indigo-600 rounded-md px-2 inline-block w-full sticky; */
 }
 
 .autocomplete-input {
-  @apply outline-none my-2 w-full;
+  @apply appearance-none
+        rounded-md 
+        relative 
+        block 
+        w-full 
+        px-3 
+        py-2 
+        border 
+        border-gray-300 
+        placeholder-gray-500 
+        text-gray-900 
+        outline-none
+        focus:outline-none 
+        focus:border-purple-600 
+        focus:z-10 
+        sm:text-sm
+        ease-out 
+        duration-200;
 }
 
 .autocomplete-result-list {

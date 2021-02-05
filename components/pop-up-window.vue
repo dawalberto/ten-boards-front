@@ -55,26 +55,26 @@ export default {
   computed: {
     classSizePopUp() {
       return {
+        'md:w-11/12 md:h-5/6': this.sizePopup === 'big',
         'md:h-2/5 md:w-3/4 lg:w-2/4 xl:w-2/5': this.sizePopup === 'medium',
         'sm:h-auto sm:w-auto': this.sizePopup === 'small',
       }
     },
     classSizePopUpHeader() {
       return {
-        'h-12': this.sizePopup === 'medium',
+        'h-12': this.sizePopup !== 'small',
         'h-auto': this.sizePopup === 'small',
       }
     },
     classSizePopContent() {
       return {
-        'h-5/6 overflow-y-scroll overflow-x-hidden':
-          this.sizePopup === 'medium',
+        'h-5/6 overflow-y-scroll overflow-x-hidden': this.sizePopup !== 'small',
         'h-auto': this.sizePopup === 'small',
       }
     },
     classSizePopFooter() {
       return {
-        'absolute bottom-0 left-0': this.sizePopup === 'medium',
+        'absolute bottom-0 left-0': this.sizePopup !== 'small',
       }
     },
   },

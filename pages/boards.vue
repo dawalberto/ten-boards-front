@@ -1,11 +1,21 @@
 <template>
   <div>
     <BackgroundImage
-      :src-image="`scrum_board_isometric.svg`"
-      :alt-image="'scrum board'"
+      src-image="scrum_board_isometric.svg"
+      alt-image="scrum board"
     />
+
+    <PopUpWindow
+      v-if="showPopUpCreateBoard"
+      title-header="boards.new-board"
+      size-popup="big"
+      @cancel="showPopUpCreateBoard = false"
+    >
+      <CreateUpdateBoard />
+    </PopUpWindow>
+
     <div class="flex w-full flex-row-reverse">
-      <button class="btn-primary fl-upper">
+      <button class="btn-primary fl-upper" @click="showPopUpCreateBoard = true">
         {{ $t('new-board') }}
       </button>
     </div>
@@ -13,7 +23,7 @@
       class="flex flex-col w-full mt-2 rounded-md shadow-xl boards-preview-container"
     >
       <div
-        class="rounded-t-md py-4 px-6 flex justify-start items-center bg-gradient-to-r from-blue-500 to-purple-600 z-10"
+        class="rounded-t-md py-4 px-6 flex justify-start items-center bg-primary z-10"
       >
         <SvgIcon
           name="clipboard-list"
@@ -51,9 +61,11 @@
 
 <script>
 import BackgroundImage from '~/components/background-image'
+import PopUpWindow from '~/components/pop-up-window'
+import CreateUpdateBoard from '~/components/create-update-board'
 
 export default {
-  components: { BackgroundImage },
+  components: { BackgroundImage, PopUpWindow, CreateUpdateBoard },
   data() {
     return {
       boards: [],
@@ -62,6 +74,7 @@ export default {
       totalFinishedBoards: 0,
       totalUnfinishedBoards: 0,
       seeingUnfinishedBoards: true,
+      showPopUpCreateBoard: false,
     }
   },
   mounted() {
